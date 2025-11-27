@@ -3,168 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qizhou Deng — Computational Media PhD Portfolio (WPI 2026)</title>
+    <meta name="description" content="Qizhou Deng -  Researching AI in Games, PCG, and Player Modeling.">
+    <title>Qizhou Deng </title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0d0d12;
-            --text: #e0e0e0;
-            --accent: #ff3366;     /* electric coral */
-            --card: #1a1a24;
-            --border: #332244;
-            --shadow: 0 20px 50px rgba(255,51,102,0.25);
+            /* Palette: Deep Space & Neon Research */
+            --bg-deep: #0a0a0f;
+            --bg-surface: #13131a;
+            --bg-glass: rgba(19, 19, 26, 0.7);
+
+            --text-main: #e0e0e0;
+            --text-muted: #9494a8;
+
+            --accent-primary: #ff3366; /* Electric Coral */
+            --accent-secondary: #00f2ea; /* Cyan for research/code vibes */
+
+            --border: rgba(255, 255, 255, 0.08);
+            --shadow-card: 0 10px 30px -10px rgba(0,0,0,0.5);
+            --glow: 0 0 20px rgba(255, 51, 102, 0.15);
         }
-        * { box-sizing:border-box; }
+
+        /* RESET & BASE */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            margin:0; font-family:'Inter', system-ui, sans-serif;
-            background:var(--bg); color:var(--text); line-height:1.7;
-            background-image: radial-gradient(circle at 20% 80%, rgba(255,51,102,0.08) 0%, transparent 50%);
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-image:
+                    radial-gradient(circle at 15% 15%, rgba(255, 51, 102, 0.04) 0%, transparent 40%),
+                    radial-gradient(circle at 85% 85%, rgba(0, 242, 234, 0.04) 0%, transparent 40%);
+            background-attachment: fixed;
         }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3 { color: #fff; letter-spacing: -0.02em; }
+        h1 { font-weight: 800; font-size: 3.5rem; line-height: 1.1; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; }
+        p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem; max-width: 65ch; }
+
+        .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
+        a { color: var(--text-main); text-decoration: none; transition: 0.2s; border-bottom: 1px solid var(--border); }
+        a:hover { color: var(--accent-primary); border-color: var(--accent-primary); }
+
+        /* LAYOUT UTILS */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        section { margin: 8rem 0; }
+
+        /* HEADER */
         header {
-            text-align:center; padding:10rem 2rem 7rem;
-            background: linear-gradient(to bottom, #1a1a2e, var(--bg));
+            padding: 8rem 0 4rem;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(to bottom, rgba(10,10,15,0), var(--bg-deep));
         }
-        h1 { font-size:4.5rem; margin:0; font-weight:900; color:white; letter-spacing:-2px; }
-        .subtitle { font-size:1.5rem; color:#ff6699; margin-top:1rem; }
-
-        .container { max-width:1220px; margin:0 auto; padding:0 2rem; }
-        .projects { display:grid; gap:5.5rem; margin:7rem 0; }
-
-        .project {
-            background:var(--card); border-radius:28px; overflow:hidden;
-            box-shadow:var(--shadow); border:2px solid var(--border);
-            transition:0.4s;
-        }
-        .project:hover { transform:translateY(-18px); border-color:var(--accent); }
-
-        .demo { position:relative; width:100%; height:720px; background:#000; }
-        iframe { width:100%; height:100%; border:none; }
-        .play-btn {
-            position:absolute; inset:0; background:rgba(0,0,0,0.7);
-            display:flex; align-items:center; justify-content:center; cursor:pointer;
-            transition:0.3s;
-        }
-        .play:hover { background:rgba(0,0,0,0.5); }
-        .play span {
-            width:130px; height:130px; background:var(--accent); color:white;
-            border-radius:50%; font-size:70px; display:flex;
-            align-items:center; justify-content:center; box-shadow:0 15px 40px rgba(255,51,102,0.6);
+        .intro-tags {
+            display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;
+            font-family: 'JetBrains Mono', monospace; color: var(--accent-secondary);
         }
 
-        .content { padding:3.5rem; }
-        .content h2 { font-size:2.6rem; margin:0 0 1.2rem; color:white; }
-        .content p { font-size:1.18rem; color:#ccc; }
-        .tags { margin:1.8rem 0; }
-        .tag {
-            display:inline-block; background:var(--accent); color:black;
-            padding:0.6rem 1.4rem; border-radius:50px; font-weight:700; font-size:0.95rem;
-            margin:0.4rem 0.7rem 0.4rem 0;
+        /* PROJECTS (The Core) */
+        .project-card {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr; /* Image wider than text */
+            gap: 3rem;
+            margin-bottom: 6rem;
+            align-items: center;
         }
-        .links a {
-            color:var(--accent); text-decoration:none; margin-right:2rem; font-weight:600;
+
+        /* Alternating layout for variety */
+        .project-card:nth-child(even) { grid-template-columns: 1fr 1.2fr; }
+        .project-card:nth-child(even) .media-frame { order: 2; }
+
+        .media-frame {
+            position: relative;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease;
         }
-        .links a:hover { text-decoration:underline; }
+        .media-frame:hover { transform: translateY(-5px); border-color: var(--accent-secondary); }
 
-        .coming { background:#222; text-align:center; padding:5rem; border:3px dashed #444; border-radius:24px; }
+        iframe { width: 100%; height: 100%; border: none; }
 
-        footer { text-align:center; padding:7rem 2rem 4rem; color:#777; }
-        @media (max-width:960px) {
-            .demo { height:460px; }
-            h1 { font-size:3.4rem; }
-            header { padding:7rem 1rem 5rem; }
+        .project-meta h3 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .project-sub { color: var(--accent-primary); font-weight: 600; margin-bottom: 1rem; display: block; }
+
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .tech-pill {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: var(--text-main);
+        }
+
+        .actions { display: flex; gap: 1.5rem; font-weight: 600; }
+        .btn-link {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            border-bottom: 2px solid var(--accent-secondary);
+            padding-bottom: 2px;
+        }
+        .btn-link:hover { color: var(--accent-secondary); }
+
+        /* PUBLICATIONS / SKILLS GRID */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+
+        .pub-item {
+            margin-bottom: 1.5rem; padding-left: 1rem;
+            border-left: 2px solid var(--border); transition: 0.2s;
+        }
+        .pub-item:hover { border-left-color: var(--accent-primary); }
+        .pub-title { color: #fff; font-weight: 600; display: block; }
+        .pub-venue { font-style: italic; color: var(--accent-secondary); font-size: 0.9rem; }
+
+        .skill-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+        .skill-list li::before { content: "▹"; color: var(--accent-primary); margin-right: 0.5rem; }
+
+        /* FOOTER */
+        footer {
+            text-align: center; padding: 4rem 0;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted); font-size: 0.9rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            h1 { font-size: 2.5rem; }
+            .project-card, .project-card:nth-child(even) {
+                grid-template-columns: 1fr; gap: 1.5rem;
+            }
+            .media-frame { order: 0 !important; } /* Image always top on mobile */
+            .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header>
     <div class="container">
         <h1>Qizhou Deng</h1>
-        <div class="subtitle">
-            AI in Games • Player Modeling • Procedural Generation • Systems Programming
+        <!--        <p style="font-size: 1.25rem; color: #fff;">-->
+        <!--            PhD Student in Computational Media (WPI 2026)-->
+        <!--        </p>-->
+        <p>
+            Interested in •<strong>Game Development</strong> <strong>•AI in Games </strong>•<strong> Player Modeling </strong>•<strong> Procedural Content Generation </strong>• <strong>Systems Programming</strong>
+        </p>
+        <div class="intro-tags">
+            <span>> AI_in_Games</span>
+            <span>> C++</span>
+            <span>> Unity</span>
+            <span>> PCG</span>
         </div>
     </div>
 </header>
 
 <div class="container">
-    <div class="projects">
 
-        <!-- PROJECT 1: SkillSense (Unity 3D) -->
-        <div class="project">
-            <div class="demo" id="p1">
-                <div class="play" onclick="this.outerHTML='<iframe src=\'https://itch.io/embed-upload/XXXXXXX?color=333333\' allowfullscreen></iframe>'">
-                    <span>Play</span>
-                </div>
+    <section id="work">
+        <h2 style="border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 3rem;">Selected Projects</h2>
+
+        <article class="project-card">
+            <div class="media-frame">
+                <iframe src='https://itch.io/embed-upload/XXXXXXX?color=333333' allowfullscreen></iframe>
             </div>
-            <div class="content">
-                <h2>SkillSense — Real-Time Player Skill Modeling for Adaptive Stealth-Platforming</h2>
+            <div class="project-meta">
+                <h3>Super-Platformer-3D</h3>
+                <span class="project-sub">Real Time Platformer Game</span>
                 <p>
-                    Unity Sentis + ONNX neural network classifies player skill from 12 movement features → instantly adapts enemy sight, patrol speed, and platform timing.<br>
-                    • 92% accuracy • 18-player study ongoing • CHI PLAY 2026 target
+                    A framework utilizing Unity Sentis and ONNX neural networks to classify player skill based on 12 micro-movement features. The system instantly adapts enemy AI behavior and platforming tolerances without breaking flow.
                 </p>
-                <div class="tags">
-                    <span class="tag">Live Playable</span>
-                    <span class="tag">Player Modeling</span>
-                    <span class="tag">Dynamic Difficulty</span>
-                    <span class="tag">Sentis</span>
+                <div class="tech-stack mono">
+                    <span class="tech-pill">Unity 3D</span>
+                    <span class="tech-pill">PyTorch -> ONNX</span>
+                    <span class="tech-pill">Burrucuda</span>
                 </div>
-                <div class="links">
-                    <a href="https://github.com/QizhouD/SkillSense" target="_blank">GitHub</a> •
-                    <a href="SkillSense_Report.pdf">Paper (PDF)</a> •
-                    <a href="#">YouTube Demo</a>
+                <div class="actions">
+                    <a href="#" class="btn-link">Read Paper (PDF)</a>
+                    <a href="https://github.com/QizhouD/SkillSense" target="_blank" class="btn-link">View Code</a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <!-- PROJECT 2: Neon Shadow (C++ 2D Action Game) -->
-        <div class="project">
-            <div class="demo">
-                <iframe src="https://www.youtube.com/embed/YOUR_YOUTUBE_ID_HERE" allowfullscreen></iframe>
+        <article class="project-card">
+            <div class="media-frame">
+                <iframe src="https://www.youtube.com/embed/YOUR_ID_HERE" title="Dwarf V.S Mushroom"></iframe>
             </div>
-            <div class="content">
-                <h2>Neon Shadow — Hand-Coded 2D Action-Platformer in C++17 & SDL2</h2>
+            <div class="project-meta">
+                <h3>Dwarf V.S Mushroom</h3>
+                <span class="project-sub">Custom C++ Game </span>
                 <p>
-                    From-scratch game engine: entity-component system, AABB collision, state machines, particle effects, level editor, save system — all written without Unity/Unreal.<br>
-                    Demonstrates deep systems programming, memory management, and real-time architecture skills.
+                    A 2D action-platformer built from scratch to demonstrate low-level systems mastery. Features a custom Entity-Component System (ECS), memory pooling for particle effects, and a hand-written AABB physics solver.
                 </p>
-                <div class="tags">
-                    <span class="tag">C++17</span>
-                    <span class="tag">SDL2</span>
-                    <span class="tag">Custom Engine</span>
-                    <span class="tag">ECS</span>
-                    <span class="tag">Open Source</span>
+                <div class="tech-stack mono">
+                    <span class="tech-pill">C++</span>
+                    <span class="tech-pill">SFML</span>
+                    <span class="tech-pill">Data-Oriented Design</span>
                 </div>
-                <div class="links">
-                    <a href="https://github.com/QizhouD/2D-action-game" target="_blank">GitHub (22 stars)</a> •
-                    <a href="https://www.youtube.com/watch=..." target="_blank">Gameplay Video</a> •
-                    <a href="NeonShadow_Documentation.pdf">Tech Write-up</a>
+                <div class="actions">
+                    <a href="#" class="btn-link">Tech Breakdown</a>
+                    <a href="https://github.com/QizhouD/2D-action-game" target="_blank" class="btn-link">View GitHub</a>
                 </div>
             </div>
-        </div>
+        </article>
 
-        <!-- PROJECT 3: StealthForge (coming Dec 2025) -->
-        <div class="project">
-            <div class="coming">
-                <h2>StealthForge — Mixed-Initiative PCG Level Editor<br><small>Launching December 2025</small></h2>
-                <p style="font-size:1.3rem;margin:2rem 0;">
-                    Constraint-solving procedural generation with guaranteed reachability + stealth paths<br>
-                    Real-time designer painting, solvability repair, designer study planned
-                </p>
-                <p><em>Live editor coming soon — follow on GitHub</em></p>
+        <article class="project-card">
+            <div class="media-frame" style="background: #1a1a24; display: flex; align-items: center; justify-content: center; text-align: center;">
+                <div style="padding: 2rem;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Wf3L9IoKxyk?si=NMw5H2yBFKyvDf3s&amp;start=42" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                </div>
             </div>
-        </div>
+            <div class="project-meta">
+                <h3>2D Procedural Content Generation</h3>
+                <span class="project-sub">Mixed-Initiative PCG Editor</span>
+                <p>
+                    A constraint-solving level design tool. It guarantees reachability for stealth paths while allowing designers to "paint" high-level intent. Currently designing a user study to measure co-creativity.
+                </p>
+                <div class="tech-stack mono">
+                    <span class="tech-pill">C# / WPF</span>
+                    <span class="tech-pill">Wave Function Collapse</span>
+                    <span class="tech-pill">Constraint Solving</span>
+                </div>
+                <div class="actions">
+                    <a href="#" class="btn-link">Project Page</a>
+                </div>
+            </div>
+        </article>
 
-    </div>
+    </section>
+
+    <section>
+        <div class="grid-2">
+
+            <div>
+                <h2>Publications & Talks</h2>
+                <!--                <div class="pub-item">-->
+                <!--                    <span class="pub-title">Dynamic Difficulty Adjustment via Deep Learning in Stealth Games</span>-->
+                <!--                    <span class="pub-venue">CHI PLAY 2026 (Under Review)</span>-->
+                <!--                </div>-->
+                <!--                <div class="pub-item">-->
+                <!--                    <span class="pub-title">Procedural Generation for Non-Euclidean Spaces</span>-->
+                <!--                    <span class="pub-venue">FDG 2024 (Workshop Paper)</span>-->
+                <!--                </div>-->
+                <!--                <div class="pub-item">-->
+                <!--                    <span class="pub-title">Guest Lecturer: Game Engine Architecture</span>-->
+                <!--                    <span class="pub-venue">WPI IMGD 4000 (Fall 2024)</span>-->
+                <!--                </div>-->
+            </div>
+
+            <div>
+                <h2>Technical Proficiency</h2>
+                <h4 class="mono" style="color:var(--text-muted); margin: 1.5rem 0 0.5rem;">Languages</h4>
+                <ul class="skill-list mono">
+                    <li>C++ (11/14/17)</li>
+                    <li>C# / .NET</li>
+                    <li>Python (PyTorch)</li>
+                    <li>GLSL / HLSL</li>
+                </ul>
+
+                <h4 class="mono" style="color:var(--text-muted); margin: 1.5rem 0 0.5rem;">Tools & Frameworks</h4>
+                <ul class="skill-list mono">
+                    <li>Unity 3D / Sentis</li>
+                    <li>Unreal Engine 5</li>
+                    <li>SDL2 / SFML</li>
+                    <li>Git / Perforce</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
 </div>
 
 <footer>
-    <p>
-        qizhoudeng0@gmail.com •
-        <a href="https://linkedin.com/in/qizhoudeng" target="_blank">LinkedIn</a> •
-        <a href="https://github.com/QizhouD" target="_blank">GitHub</a> •
-        <a href="Qizhou_Deng_PhD_Portfolio_2026.pdf">Download PDF Portfolio</a>
-    </p>
-    <p>© 2025 Qizhou Deng — Built with blood, sweat, and zero JavaScript frameworks</p>
+    <div class="container">
+        <p style="margin-bottom: 0.5rem; color: #fff;">
+            <strong>Qizhou Deng</strong> • qizhoudeng0@gmail.com
+        </p>
+        <div style="margin-bottom: 2rem;">
+            <a href="#" style="margin: 0 10px;">LinkedIn</a>
+            <a href="https://github.com/QizhouD" style="margin: 0 10px;">GitHub</a>
+            <a href="#" style="margin: 0 10px;">Download CV</a>
+        </div>
+        <p class="mono" style="font-size: 0.75rem; opacity: 0.5;">
+            Hand-coded in HTML5/CSS3. Zero JavaScript frameworks.
+        </p>
+    </div>
 </footer>
 
 </body>
