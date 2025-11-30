@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Qizhou Deng -  Researching AI in Games, PCG, and Player Modeling.">
-    <title>Qizhou Deng </title>
+    <title>Qizhou Deng</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -36,16 +36,21 @@
                     radial-gradient(circle at 15% 15%, rgba(255, 51, 102, 0.04) 0%, transparent 40%),
                     radial-gradient(circle at 85% 85%, rgba(0, 242, 234, 0.04) 0%, transparent 40%);
             background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* TYPOGRAPHY */
-        h1, h2, h3 { color: #fff; letter-spacing: -0.02em; }
+        h1, h2, h3, h4 { color: #fff; letter-spacing: -0.02em; }
         h1 { font-weight: 800; font-size: 3.5rem; line-height: 1.1; margin-bottom: 0.5rem; }
         h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; }
+        h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem; }
+        h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
         p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem; max-width: 65ch; }
 
         .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
-        a { color: var(--text-main); text-decoration: none; transition: 0.2s; border-bottom: 1px solid var(--border); }
+        a { color: var(--text-main); text-decoration: none; transition: 0.2s; border-bottom: 1px solid var(--border); cursor: pointer; }
         a:hover { color: var(--accent-primary); border-color: var(--accent-primary); }
 
         /* LAYOUT UTILS */
@@ -108,6 +113,7 @@
             display: inline-flex; align-items: center; gap: 0.5rem;
             border-bottom: 2px solid var(--accent-secondary);
             padding-bottom: 2px;
+            cursor: pointer;
         }
         .btn-link:hover { color: var(--accent-secondary); }
 
@@ -127,10 +133,59 @@
 
         /* FOOTER */
         footer {
+            margin-top: auto;
             text-align: center; padding: 4rem 0;
             border-top: 1px solid var(--border);
             color: var(--text-muted); font-size: 0.9rem;
         }
+
+        /* BREAKDOWN VIEW STYLES */
+        .article-content {
+            margin-top: 4rem;
+            max-width: 800px;
+        }
+
+        .article-content h2 {
+            margin-top: 3rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .article-content h3 {
+            margin-top: 2rem;
+            color: var(--text-main);
+        }
+
+        .article-content ul {
+            margin-bottom: 1.5rem;
+            margin-left: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* CODE BLOCK STYLES */
+        pre {
+            background: #0d0d12;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: #dcdcdc;
+            line-height: 1.5;
+        }
+
+        /* Helper for the SPA Toggle */
+        .hidden { display: none !important; }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
@@ -145,138 +200,303 @@
 </head>
 <body>
 
-<header>
+<!-- HOME VIEW WRAPPER -->
+<div id="home-view">
+
+    <header>
+        <div class="container">
+            <h1>Qizhou Deng</h1>
+            <p>
+                Interested in •<strong>Game Development</strong> <strong>•AI in Games </strong>•<strong> Player Modeling </strong>•<strong> Procedural Content Generation </strong>• <strong>Systems Programming</strong>
+            </p>
+            <div class="intro-tags">
+                <span>> AI_in_Games</span>
+                <span>> C++</span>
+                <span>> Unity</span>
+                <span>> PCG</span>
+            </div>
+        </div>
+    </header>
+
     <div class="container">
-        <h1>Qizhou Deng</h1>
-        <!--        <p style="font-size: 1.25rem; color: #fff;">-->
-        <!--            PhD Student in Computational Media (WPI 2026)-->
-        <!--        </p>-->
-        <p>
-            Interested in •<strong>Game Development</strong> <strong>•AI in Games </strong>•<strong> Player Modeling </strong>•<strong> Procedural Content Generation </strong>• <strong>Systems Programming</strong>
-        </p>
-        <div class="intro-tags">
-            <span>> AI_in_Games</span>
-            <span>> C++</span>
-            <span>> Unity</span>
-            <span>> PCG</span>
+
+        <section id="work">
+            <h2 style="border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 3rem;">Selected Projects</h2>
+
+            <article class="project-card">
+                <div class="media-frame">
+                    <iframe src='https://itch.io/embed-upload/XXXXXXX?color=333333' allowfullscreen></iframe>
+                </div>
+                <div class="project-meta">
+                    <h3>Super-Platformer-3D</h3>
+                    <span class="project-sub">Real Time Platformer Game</span>
+                    <p>
+                        A framework utilizing Unity Sentis and ONNX neural networks to classify player skill based on 12 micro-movement features. The system instantly adapts enemy AI behavior and platforming tolerances without breaking flow.
+                    </p>
+                    <div class="tech-stack mono">
+                        <span class="tech-pill">Unity 3D</span>
+                        <span class="tech-pill">PyTorch -> ONNX</span>
+                        <span class="tech-pill">Burrucuda</span>
+                    </div>
+                    <div class="actions">
+                        <a href="#" class="btn-link">Read Paper (PDF)</a>
+                        <a href="https://github.com/QizhouD/SkillSense" target="_blank" class="btn-link">View Code</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="media-frame">
+                    <iframe src="https://www.youtube.com/embed/YOUR_ID_HERE" title="Dwarf V.S Mushroom"></iframe>
+                </div>
+                <div class="project-meta">
+                    <h3>Dwarf V.S Mushroom</h3>
+                    <span class="project-sub">Custom C++ Game </span>
+                    <p>
+                        A 2D action-platformer built from scratch to demonstrate low-level systems mastery. Features a custom Entity-Component System (ECS), memory pooling for particle effects, and a hand-written AABB physics solver.
+                    </p>
+                    <div class="tech-stack mono">
+                        <span class="tech-pill">C++</span>
+                        <span class="tech-pill">SFML</span>
+                        <span class="tech-pill">Data-Oriented Design</span>
+                    </div>
+                    <div class="actions">
+                        <!-- UPDATED LINK: Calls the JS function to switch views -->
+                        <a onclick="showBreakdown()" class="btn-link">Tech Breakdown</a>
+                        <a href="https://github.com/QizhouD/2D-action-game" target="_blank" class="btn-link">View GitHub</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="media-frame">
+                    <iframe  src="https://www.youtube.com/embed/Wf3L9IoKxyk?si=NMw5H2yBFKyvDf3s&amp;start=42" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="project-meta">
+                    <h3>2D Procedural Content Generation</h3>
+                    <span class="project-sub">Mixed-Initiative PCG Editor</span>
+                    <p>
+                        A constraint-solving level design tool. It guarantees reachability for stealth paths while allowing designers to "paint" high-level intent. Currently designing a user study to measure co-creativity.
+                    </p>
+                    <div class="tech-stack mono">
+                        <span class="tech-pill">C# / WPF</span>
+                        <span class="tech-pill">Wave Function Collapse</span>
+                        <span class="tech-pill">Constraint Solving</span>
+                    </div>
+                    <div class="actions">
+                        <a href="#" class="btn-link">Project Page</a>
+                    </div>
+                </div>
+            </article>
+
+        </section>
+
+        <section>
+            <div class="grid-2">
+
+                <div>
+                    <h2>Publications & Talks</h2>
+                    <!-- Placeholder content preserved -->
+                </div>
+
+                <div>
+                    <h2>Technical Proficiency</h2>
+                    <h4 class="mono" style="color:var(--text-muted); margin: 1.5rem 0 0.5rem;">Languages</h4>
+                    <ul class="skill-list mono">
+                        <li>C++ (11/14/17)</li>
+                        <li>C# / .NET</li>
+                        <li>Python (PyTorch)</li>
+                        <li>GLSL / HLSL</li>
+                    </ul>
+
+                    <h4 class="mono" style="color:var(--text-muted); margin: 1.5rem 0 0.5rem;">Tools & Frameworks</h4>
+                    <ul class="skill-list mono">
+                        <li>Unity 3D / Sentis</li>
+                        <li>Unreal Engine 5</li>
+                        <li>SDL2 / SFML</li>
+                        <li>Git / Perforce</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+</div>
+<!-- END HOME VIEW -->
+
+
+<!-- BREAKDOWN VIEW WRAPPER (Hidden by default) -->
+<div id="breakdown-view" class="hidden">
+
+    <header style="padding: 4rem 0;">
+        <div class="container">
+            <a onclick="showHome()" class="btn-link" style="margin-bottom: 2rem; border: none; font-size: 0.9rem;">← Back to Projects</a>
+            <h1>Dwarf V.S Mushroom</h1>
+            <p class="mono" style="color: var(--accent-secondary);">Technical Breakdown & Design Document</p>
+        </div>
+    </header>
+
+    <div class="container article-content">
+
+        <h2>Overview</h2>
+        <p>This project is a 2D action game built with SFML that I architected around a lightweight Entity–Component–System (ECS) core. It features a text-driven level loader, real-time spawning, collision and gameplay systems, a letterboxed render pipeline, and a minimal UI layer for HUD and menus. The codebase demonstrates applied software engineering patterns (Observer, Service Locator), data-driven world construction, and experimentation with multiple ECS storage strategies (big-array, archetypes, packed-array) for performance and maintainability.</p>
+
+        <h2>Tech Stack and Key Libraries</h2>
+        <ul>
+            <li><strong>SFML 2.x</strong> for windowing, graphics, input, timing, and basic audio plumbing</li>
+            <li><strong>C++17 STL</strong> (<code>&lt;memory&gt;</code>, <code>&lt;vector&gt;</code>, <code>&lt;unordered_map&gt;</code>, <code>&lt;functional&gt;</code>, <code>&lt;random&gt;</code>, etc.)</li>
+            <li><strong>Custom ECS utilities:</strong> <code>Bitmask</code>, <code>PackedArray</code>, system interfaces, and an <code>Observer</code> implementation</li>
+        </ul>
+
+        <h2>High-Level Architecture</h2>
+        <p><strong>Game loop entry:</strong> <code>main.cpp</code> initializes <code>Game</code>, loads a textual level, and runs an adaptive fixed-target loop (nominally 60 FPS):</p>
+        <pre><code>// main.cpp
+while (!game.getWindow()->isWindowDone()) {
+    adaptiveLoop(game, lastTime, 0.016f);
+}</code></pre>
+
+        <p><strong>Core controller:</strong> <code>Game</code> orchestrates lifecycle (<code>init</code>, <code>handleInput</code>, <code>update</code>, <code>render</code>), state transitions, level management, ECS systems, and statistics.</p>
+        <p><strong>Rendering/UI:</strong> <code>Window</code> wraps <code>sf::RenderWindow</code>, a letterboxed <code>sf::View</code>, GUI font assets, and HUD/menu drawing.</p>
+        <p><strong>World building:</strong> <code>Board</code> manages tiles; level parsing maps ASCII to tiles/entities, which are created via data helpers like <code>buildEntityAt</code>.</p>
+        <p><strong>Systems:</strong> Input, Movement, Collider, Gameplay, TTL, Graphics, and Debug systems run per-entity, guarded by <code>validate</code> filters.</p>
+
+        <h2>ECS Design and Storage Strategies</h2>
+        <p><code>Game</code> supports switching ECS backends via <code>ECSType</code>:</p>
+        <ul>
+            <li><code>ECSType::BIG_ARRAY</code>: Iterate all entities for each system (<code>Game::bigArray</code>). Simple, cache-friendly when components are dense.</li>
+            <li><code>ECSType::ARCHETYPES</code>: Groups entities by component bitmask (<code>Archetype</code>) for faster system filtering.</li>
+            <li><code>ECSType::PACKED_ARRAY</code>: Uses <code>PackedArray&lt;Entity&gt;</code> for stable, compact storage and fast removal.</li>
+        </ul>
+
+        <p>Key excerpts:</p>
+        <pre><code>// Game.h
+enum class ECSType { BIG_ARRAY, ARCHETYPES, PACKED_ARRAY };
+struct Archetype {
+    std::vector&lt;std::shared_ptr&lt;Entity&gt;&gt; entities;
+    Bitmask componentMask;
+};</code></pre>
+
+        <pre><code>// Game.cpp
+systems = { make&lt;InputSystem&gt;(), make&lt;MovementSystem&gt;(), make&lt;ColliderSystem&gt;(),
+            make&lt;GameplaySystem&gt;(), make&lt;PrintDebugSystem&gt;(), make&lt;TTLSystem&gt;() };</code></pre>
+
+        <p>This design lets me compare iteration and filtering tradeoffs across ECS layouts and lays groundwork for archetype-specific updates (<code>Game::updateArchetypes</code>) or packed, indirect indexing (<code>Game::updatePackedArray</code>).</p>
+
+        <h2>Game Loop, Timing, and Frame Pacing</h2>
+        <ul>
+            <li><strong>Time source:</strong> <code>sf::Clock</code> in <code>Game</code> and <code>getElapsed()</code> queries in <code>main</code>.</li>
+            <li><strong>Loop method:</strong> <code>adaptiveLoop(Game&, lastTime, updateTarget)</code> computes per-frame <code>elapsedSeconds</code>, runs <code>handleInput → update → render</code>, then sleeps the remainder to hit the target frame time, and computes instantaneous FPS.</li>
+        </ul>
+
+        <pre><code>float elapsedSeconds = current - lastTime;
+if (elapsedSeconds < updateTarget) {
+    sf::sleep(sf::seconds(updateTarget - elapsedSeconds));
+}
+float fps = 1.0f / elapsedSeconds;</code></pre>
+
+        <p><code>Game::setFPS(int)</code> updates an on-screen counter; a <code>PrintDebugSystem</code> provides additional instrumentation.</p>
+
+        <h3>Tradeoffs and Rigor</h3>
+        <p>Chose a simple fixed-target with sleep for predictable pacing; acceptable for a single-threaded student project. For a production loop, I would separate fixed-step simulation and variable rendering, and account for <code>sleep</code> granularity on Windows.</p>
+
+        <h2>Windowing, Views, and Letterboxing</h2>
+        <p><code>Window</code> encapsulates creation of <code>sf::RenderWindow</code> in windowed or fullscreen modes. It uses a fixed logical <code>sf::View</code> sized to the game world (<code>logicalViewSize</code>), with a letterbox applied on resize to preserve aspect ratio.</p>
+
+        <pre><code>static void applyLetterboxToView(sf::View& v, unsigned w, unsigned h) {
+    float windowRatio = float(w)/h, viewRatio = v.getSize().x / v.getSize().y;
+    // compute viewport {posX, posY, sizeX, sizeY}
+}</code></pre>
+
+        <ul>
+            <li><strong>GUI assets:</strong> a global font, FPS text, pause text, health text/bar, and a simple menu (<code>Dwarf VS Mushrooms</code>) prompt.</li>
+            <li><code>drawGUI(const Game&)</code> renders HUD elements (FPS, health, menu, result) over the game view.</li>
+        </ul>
+
+        <h2>Level Loading and World Construction</h2>
+        <p><code>main.cpp</code> reads <code>levels/lvl0.txt</code> into <code>std::vector&lt;std::string&gt;</code>.</p>
+        <p><code>Game::parseLevelLines</code> converts ASCII to world:</p>
+        <ul>
+            <li><code>'.'</code> → corridor tile (<code>img/floor.png</code>)</li>
+            <li><code>'w'</code> → wall tile (<code>img/wall.png</code>)</li>
+            <li><code>'x'</code> → place a log entity and floor tile</li>
+            <li>Additional symbols map similarly (player spawn, enemies, pickups, etc.).</li>
+        </ul>
+
+        <pre><code>const int spriteWH = 50;
+const float tileScale = 2.0f, itemScale = 1.0f;
+// Center entities on tiles
+ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale + center);</code></pre>
+        <p>This makes level creation data-driven, reproducible, and trivially editable with a text editor.</p>
+
+        <h2>Gameplay Systems and Mechanics</h2>
+        <ul>
+            <li><strong>Input:</strong> <code>InputHandler</code> and <code>InputSystem</code> translate SFML events and keyboard state into player commands (<code>Command</code> pattern).</li>
+            <li><strong>Movement:</strong> <code>MovementSystem</code> integrates velocities into positions per <code>elapsed</code>.</li>
+            <li><strong>Collisions:</strong> <code>ColliderSystem</code> resolves entity collisions and tile blocking, invoking type-specific callbacks via:</li>
+        </ul>
+        <pre><code>void Game::registerCollisionCallback(EntityType type, std::function&lt;void(Entity*)&gt; cb);</code></pre>
+        <ul>
+            <li><strong>TTL:</strong> <code>TTLSystem</code> expires temporary entities (e.g., projectiles, hit effects).</li>
+            <li><strong>Rendering:</strong> <code>GraphicsSystem</code> draws all <code>GRAPHICS</code>-tagged components to the <code>Window</code>’s <code>gameView</code>.</li>
+            <li><strong>Gameplay:</strong> <code>GameplaySystem</code> handles health, attacks, pickups, and scoring. The <code>Observer</code> is used to notify achievements and stat changes without tight coupling.</li>
+        </ul>
+
+        <h2>State Management and Flow</h2>
+        <p><code>enum class GameState { Menu, Playing, Result };</code></p>
+        <p>In Menu, the GUI displays a title and “Press Enter to Start”. <code>Enter</code> transitions to Playing (<code>Game::startGame()</code>).</p>
+        <p>During play, the engine tracks:</p>
+        <ul>
+            <li><code>killCount</code>, <code>fireShotCount</code> via <code>incrementKills()</code> / <code>incrementFireShots()</code></li>
+            <li><code>levelClock</code> to compute <code>levelFinishSeconds</code></li>
+        </ul>
+        <p>On level completion or player death, <code>triggerSettlement()</code> records the result and switches to <code>Result</code> for summary.</p>
+
+        <h2>Software Engineering Patterns and Rationale</h2>
+        <ul>
+            <li><strong>Observer Pattern</strong> (<code>utils/Observer.h</code>): decouples gameplay events (e.g., kill, shot fired, level complete) from UI and achievement tracking.</li>
+            <li><strong>Service Locator</strong> (<code>core/ServiceLocator.h</code>): provides access to <code>AudioManager</code> without injecting it through every system/constructor. For a larger codebase, I’d migrate to explicit dependency injection, but this keeps the sample concise.</li>
+            <li><strong>Command Pattern</strong> (<code>core/Command.h</code>): encapsulates player actions, making input rebinds and AI control easy.</li>
+        </ul>
+
+        <h2>Performance and Complexity Considerations</h2>
+        <ul>
+            <li><strong>ECS variants</strong> allow exploring iteration complexity vs. memory layout:
+                <ul>
+                    <li><strong>Big-array:</strong> O(S×E) iteration; simplest to reason about; good when many systems touch most entities.</li>
+                    <li><strong>Archetypes:</strong> filters reduce E per system; better cache locality when grouping by component masks.</li>
+                    <li><strong>Packed arrays:</strong> reduce fragmentation and speed up removal; dense memory improves traversal.</li>
+                </ul>
+            </li>
+            <li><strong>Rendering:</strong> letterboxed view prevents stretching and reduces overdraw outside the logical viewport.</li>
+            <li><strong>Frame pacing:</strong> simple sleep-based limiter provides a stable 60 FPS target on typical Windows timers. Would upgrade to a fixed-step update accumulator under load and consider <code>timeBeginPeriod</code>/Waitable timers for precision.</li>
+        </ul>
+
+        <h2>Selected Code Pointers</h2>
+        <ul>
+            <li>Entry and loop: <code>SFML\main.cpp</code></li>
+            <li>Game orchestration: <code>include\core\Game.h</code>, <code>source\core\Game.cpp</code></li>
+            <li>Windowing/UI: <code>include\graphics\Window.h</code>, <code>source\graphics\Window.cpp</code></li>
+            <li>Entities: <code>include\entities\Mushroom.h</code>, <code>include\entities\Player.h</code>, <code>include\entities\StaticEntities.h</code>, <code>include\entities\Fire.h</code></li>
+            <li>Systems: <code>include\systems\Systems.h</code></li>
+            <li>Utilities: <code>include\utils\PackedArray.h</code>, <code>include\utils\Observer.h</code></li>
+        </ul>
+
+        <h2>What I’d Highlight in an Application</h2>
+        <ul>
+            <li><strong>Engine architecture:</strong> clear separation of concerns (loop, ECS, rendering, UI) and the ability to swap ECS storage strategies to study performance.</li>
+            <li><strong>Data-driven content:</strong> ASCII level files parsed into a tile/actor world with consistent scaling and positioning.</li>
+            <li><strong>Practical patterns:</strong> Observer and Service Locator applied judiciously; command-based input; clean window/view management with letterboxing.</li>
+            <li><strong>Production-minded considerations:</strong> frame pacing, GUI overlays, spawning control, collision callbacks by <code>EntityType</code>, and a structured game state machine.</li>
+        </ul>
+
+        <div style="margin-top: 4rem; text-align: center;">
+            <a onclick="showHome()" class="btn-link" style="font-size: 1.2rem;">← Back to Projects</a>
         </div>
     </div>
-</header>
-
-<div class="container">
-
-    <section id="work">
-        <h2 style="border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 3rem;">Selected Projects</h2>
-
-        <article class="project-card">
-            <div class="media-frame">
-                <iframe src='https://itch.io/embed-upload/XXXXXXX?color=333333' allowfullscreen></iframe>
-            </div>
-            <div class="project-meta">
-                <h3>Super-Platformer-3D</h3>
-                <span class="project-sub">Real Time Platformer Game</span>
-                <p>
-                    A framework utilizing Unity Sentis and ONNX neural networks to classify player skill based on 12 micro-movement features. The system instantly adapts enemy AI behavior and platforming tolerances without breaking flow.
-                </p>
-                <div class="tech-stack mono">
-                    <span class="tech-pill">Unity 3D</span>
-                    <span class="tech-pill">PyTorch -> ONNX</span>
-                    <span class="tech-pill">Burrucuda</span>
-                </div>
-                <div class="actions">
-                    <a href="#" class="btn-link">Read Paper (PDF)</a>
-                    <a href="https://github.com/QizhouD/SkillSense" target="_blank" class="btn-link">View Code</a>
-                </div>
-            </div>
-        </article>
-
-        <article class="project-card">
-            <div class="media-frame">
-                <iframe src="https://www.youtube.com/embed/YOUR_ID_HERE" title="Dwarf V.S Mushroom"></iframe>
-            </div>
-            <div class="project-meta">
-                <h3>Dwarf V.S Mushroom</h3>
-                <span class="project-sub">Custom C++ Game </span>
-                <p>
-                    A 2D action-platformer built from scratch to demonstrate low-level systems mastery. Features a custom Entity-Component System (ECS), memory pooling for particle effects, and a hand-written AABB physics solver.
-                </p>
-                <div class="tech-stack mono">
-                    <span class="tech-pill">C++</span>
-                    <span class="tech-pill">SFML</span>
-                    <span class="tech-pill">Data-Oriented Design</span>
-                </div>
-                <div class="actions">
-                    <a href="#" class="btn-link">Tech Breakdown</a>
-                    <a href="https://github.com/QizhouD/2D-action-game" target="_blank" class="btn-link">View GitHub</a>
-                </div>
-            </div>
-        </article>
-
-        <article class="project-card">
-            <div class="media-frame">
-                    <iframe  src="https://www.youtube.com/embed/Wf3L9IoKxyk?si=NMw5H2yBFKyvDf3s&amp;start=42" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <div class="project-meta">
-                <h3>2D Procedural Content Generation</h3>
-                <span class="project-sub">Mixed-Initiative PCG Editor</span>
-                <p>
-                    A constraint-solving level design tool. It guarantees reachability for stealth paths while allowing designers to "paint" high-level intent. Currently designing a user study to measure co-creativity.
-                </p>
-                <div class="tech-stack mono">
-                    <span class="tech-pill">C# / WPF</span>
-                    <span class="tech-pill">Wave Function Collapse</span>
-                    <span class="tech-pill">Constraint Solving</span>
-                </div>
-                <div class="actions">
-                    <a href="#" class="btn-link">Project Page</a>
-                </div>
-            </div>
-        </article>
-
-    </section>
-
-    <section>
-        <div class="grid-2">
-
-            <div>
-                <h2>Publications & Talks</h2>
-                <!--                <div class="pub-item">-->
-                <!--                    <span class="pub-title">Dynamic Difficulty Adjustment via Deep Learning in Stealth Games</span>-->
-                <!--                    <span class="pub-venue">CHI PLAY 2026 (Under Review)</span>-->
-                <!--                </div>-->
-                <!--                <div class="pub-item">-->
-                <!--                    <span class="pub-title">Procedural Generation for Non-Euclidean Spaces</span>-->
-                <!--                    <span class="pub-venue">FDG 2024 (Workshop Paper)</span>-->
-                <!--                </div>-->
-                <!--                <div class="pub-item">-->
-                <!--                    <span class="pub-title">Guest Lecturer: Game Engine Architecture</span>-->
-                <!--                    <span class="pub-venue">WPI IMGD 4000 (Fall 2024)</span>-->
-                <!--                </div>-->
-            </div>
-
-            <div>
-                <h2>Technical Proficiency</h2>
-                <h4 class="mono" style="color:var(--text-muted); margin: 1.5rem 0 0.5rem;">Languages</h4>
-                <ul class="skill-list mono">
-                    <li>C++ (11/14/17)</li>
-                    <li>C# / .NET</li>
-                    <li>Python (PyTorch)</li>
-                    <li>GLSL / HLSL</li>
-                </ul>
-
-                <h4 class="mono" style="color:var(--text-muted); margin: 1.5rem 0 0.5rem;">Tools & Frameworks</h4>
-                <ul class="skill-list mono">
-                    <li>Unity 3D / Sentis</li>
-                    <li>Unreal Engine 5</li>
-                    <li>SDL2 / SFML</li>
-                    <li>Git / Perforce</li>
-                </ul>
-            </div>
-
-        </div>
-    </section>
-
 </div>
+<!-- END BREAKDOWN VIEW -->
+
 
 <footer>
     <div class="container">
@@ -293,6 +513,21 @@
         </p>
     </div>
 </footer>
+
+<script>
+    // Simple SPA logic
+    function showBreakdown() {
+        document.getElementById('home-view').classList.add('hidden');
+        document.getElementById('breakdown-view').classList.remove('hidden');
+        window.scrollTo(0,0);
+    }
+
+    function showHome() {
+        document.getElementById('breakdown-view').classList.add('hidden');
+        document.getElementById('home-view').classList.remove('hidden');
+        window.scrollTo(0, document.getElementById('work').offsetTop);
+    }
+</script>
 
 </body>
 </html>
