@@ -225,22 +225,25 @@
 
             <article class="project-card">
                 <div class="media-frame">
+                    <!-- Replace XXXXXXX with your actual itch.io ID -->
                     <iframe src='https://itch.io/embed-upload/XXXXXXX?color=333333' allowfullscreen></iframe>
                 </div>
                 <div class="project-meta">
-                    <h3>Super-Platformer-3D</h3>
+                    <h3>3D Platformer Systems</h3>
                     <span class="project-sub">Real Time Platformer Game</span>
                     <p>
-                        A framework utilizing Unity Sentis and ONNX neural networks to classify player skill based on 12 micro-movement features. The system instantly adapts enemy AI behavior and platforming tolerances without breaking flow.
+                        A scalable game architecture featuring a modular State Machine for character behavior and Strategy Pattern-based Enemy AI. Implements a fully decoupled event-driven input system and ScriptableObject architecture for robust maintainability and testability.
                     </p>
                     <div class="tech-stack mono">
                         <span class="tech-pill">Unity 3D</span>
-                        <span class="tech-pill">PyTorch -> ONNX</span>
-                        <span class="tech-pill">Burrucuda</span>
+                        <span class="tech-pill">C#</span>
+                        <span class="tech-pill">State Pattern</span>
+                        <span class="tech-pill">ScriptableObjects</span>
                     </div>
                     <div class="actions">
-                        <a href="#" class="btn-link">Read Paper (PDF)</a>
-                        <a href="https://github.com/QizhouD/SkillSense" target="_blank" class="btn-link">View Code</a>
+                        <!-- Update links as needed -->
+                        <a onclick="showPlatformer()" class="btn-link">Tech Breakdown</a>
+                        <a href="https://github.com/QizhouD/Super-Platformer-3D" target="_blank" class="btn-link">View GitHub</a>
                     </div>
                 </div>
             </article>
@@ -262,7 +265,7 @@
                     </div>
                     <div class="actions">
                         <!-- UPDATED LINK: Calls the JS function to switch views -->
-                        <a onclick="showBreakdown()" class="btn-link">Tech Breakdown</a>
+                        <a onclick="showDwarf()" class="btn-link">Tech Breakdown</a>
                         <a href="https://github.com/QizhouD/2D-action-game" target="_blank" class="btn-link">View GitHub</a>
                     </div>
                 </div>
@@ -325,9 +328,334 @@
 </div>
 <!-- END HOME VIEW -->
 
+<!-- PLATFORMER BREAKDOWN VIEW -->
+<div id="platformer-view" class="hidden">
 
-<!-- BREAKDOWN VIEW WRAPPER (Hidden by default) -->
-<div id="breakdown-view" class="hidden">
+    <header style="padding: 4rem 0;">
+        <div class="container">
+            <a onclick="showHome()" class="btn-link" style="margin-bottom: 2rem; border: none; font-size: 0.9rem;">← Back to Projects</a>
+            <h1>3D Platformer Systems</h1>
+            <p class="mono" style="color: var(--accent-secondary);">Technical Breakdown & Design Document</p>
+        </div>
+    </header>
+
+    <div class="container article-content">
+
+        <h2>Summary</h2>
+        <p>This portfolio details the core technical architecture of this game project, emphasizing the use of software engineering principles and design patterns. The project demonstrates State Machine design, Strategy Pattern implementation, and decoupled event-driven architecture (Event Channels, ScriptableObject Input).</p>
+        <p>The key focus areas are:</p>
+        <ol>
+            <li>Modular State Management: A reusable, interface-driven State Machine System governs all complex character and enemy behaviors, ensuring clean, debuggable logic.</li>
+            <li>Decoupled Input/UI: The Input System and Health System are fully decoupled from their consumer components (Player, UI) using the ScriptableObject Event Channel pattern, maximizing testability and flexibility.</li>
+            <li>Configurable AI: The Enemy AI integrates a powerful Cone Detection Strategy using the Strategy Pattern, featuring an anti-flickering cooldown system for robust transitions.</li>
+        </ol>
+        <p>The resulting architecture is highly scalable and maintainable, ready for production use and complex feature expansion.</p>
+
+        <h2>1. Architecture &amp; Design Philosophy</h2>
+        <p>My primary goal was to create a highly decoupled and scalable system. This was achieved through the systematic application of industry-standard design patterns, significantly improving the maintainability and testability of complex features.</p>
+        <ul>
+            <li>State Machine Pattern (FSM): Used extensively for both the Player Controller and the Enemy AI System to encapsulate behaviors, making logic transitions explicit and easy to debug.</li>
+            <li>Strategy Pattern: Implemented in the Detection System (e.g., ConeDetectionStrategy) and the Spawn System (LinearSpawnPointStrategy, RandomSpawnPointStrategy) to allow swapping core logic at runtime without modifying the main component.</li>
+            <li>Event Channel / ScriptableObject Events: The Input System and the Health System are fully decoupled from the UI using this pattern. For instance, the Health component broadcasts a health percentage via a FloatEventChannel, which the HealthBar listens to, eliminating direct references.</li>
+        </ul>
+
+        <h2>2. Player Controller &amp; Advanced Movement</h2>
+        <p>The PlayerController is the central hub, utilizing a state machine to manage complex interactions like variable-height jumping, dashing, and melee attacks.</p>
+        <p><strong>Key Technical Demonstrations</strong></p>
+        <ul>
+            <li>Physics-Based Movement: Utilizes the Rigidbody component for smooth, physics-correct movement. Speed is applied and dampened using SmoothDamp to achieve natural-feeling acceleration (Smooth Time: 0.2s).</li>
+            <li>Variable Jump Implementation: Achieves variable jump height by linking the upward velocity to a timer (Jump Duration: 0.5s). Releasing the jump input early stops the timer, immediately applying a high Gravity Multiplier (3x) for a fast, snappy fall.</li>
+            <li>State Management: The player's actions (Locomotion, Jump, Dash, Attack) are managed by dedicated Player States. This prevents illegal actions (e.g., attacking while dashing) and centralizes action logic.</li>
+        </ul>
+
+        <style>
+            .tech-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 2rem 0;
+                font-size: 0.95rem;
+                background-color: #fff;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            .tech-table th {
+                background-color: #2c3e50;
+                color: white;
+                font-weight: 600;
+                padding: 1rem;
+                text-align: left;
+            }
+            .tech-table td {
+                padding: 1rem;
+                border-top: 1px solid #ecf0f1;
+                vertical-align: top;
+                color: #222;
+            }
+            .tech-table tbody tr:nth-child(even) {
+                background-color: #f8f9fa;
+            }
+            .tech-table tbody tr:hover {
+                background-color: #e8f4f8;
+                transition: background-color 0.2s ease;
+            }
+            @media (max-width: 768px) {
+                .tech-table {
+                    display: block;
+                    overflow-x: auto;
+                }
+                .tech-table th, .tech-table td {
+                    white-space: nowrap;
+                }
+            }
+        </style>
+
+        <table class="tech-table">
+            <thead>
+            <tr>
+                <th>Ability</th>
+                <th>Mechanism</th>
+                <th>Demonstrates</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Dash</td>
+                <td>Force Multiplier (10x) applied for 1s, followed by a 2s cooldown.</td>
+                <td>Time-based ability management &amp; physics manipulation.</td>
+            </tr>
+            <tr>
+                <td>Double Jump</td>
+                <td>Controlled by the hasDoubleJump flag, reset only when the GroundChecker component confirms the player is grounded.</td>
+                <td>Precise physics state tracking.</td>
+            </tr>
+            <tr>
+                <td>Melee Attack</td>
+                <td>Uses a sphere-cast (Attack Distance: 1 unit) to detect targets, demonstrating proficiency with Unity's non-allocating physics queries.</td>
+                <td>Physics query implementation &amp; cooldown management.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>3. Free Look Camera System</h2>
+        <p>The CameraManager uses Cinemachine's FreeLook camera, demonstrating robust input handling and responsiveness.</p>
+        <p><strong>Key Features</strong></p>
+        <ul>
+            <li>Input Handling: Supports both mouse (RMB activated, cursor locked) and gamepad input separately, ensuring a smooth transition between control schemes.</li>
+            <li>Anti-Jump System: Camera movement is locked for one frame when RMB is pressed to prevent sudden jumps from residual mouse movement, ensuring a professional feel.</li>
+            <li>Sensitivity: Configurable Speed Multiplier for player-adjustable camera sensitivity.</li>
+        </ul>
+
+        <h2>4. In-Depth System Analysis: Modular State Machine System</h2>
+        <p><strong>Overview</strong><br>The State Machine System provides a flexible, reusable framework for managing entity behavior, applied consistently to both the Player Controller and the Enemy AI System. It enforces the State Pattern to isolate specific behaviors, making state transitions explicit and logic predictable.</p>
+        <p><strong>Architecture and Core Components</strong><br>The system is built upon a minimal set of interfaces, enforcing a clear contract for all behaviors and transitions.</p>
+        <ul>
+            <li>IState Interface: Defines the fundamental lifecycle of any behavior node.<br>• OnEnter(): Initialization logic when the state becomes active (e.g., set animation flag).<br>• Update(): Frame-by-frame logic (e.g., timer ticking, input checking).<br>• FixedUpdate(): Physics-frame logic (e.g., applying velocity, moving platforms).<br>• OnExit(): Cleanup logic before transitioning out (e.g., stop effects, reset flags).</li>
+            <li>IPredicate Interface: A simple conditional check that returns bool. This separates the transition condition from the state logic.<br>• Evaluate(): Returns true if the condition for transition is met.</li>
+            <li>ITransition Structure: Links two components: the To (Target State) and the Condition (The IPredicate instance).</li>
+        </ul>
+
+        <p><strong>The Transition Flow</strong><br>All transitions follow a strictly defined, three-step evaluation process within the State Machine's main Update loop:</p>
+        <ol>
+            <li>Any Transitions: Evaluate global transitions that can occur from any state (e.g., the Health component registers a IsDead predicate, immediately transitioning to the Death State).</li>
+            <li>Current State Transitions: Evaluate the specific outgoing transitions defined for the currently active state (e.g., from LocomotionState → JumpState when JumpInputPressed predicate is met).</li>
+            <li>State Change Execution: If a transition's condition is met, the flow executes: OnExit() of the old state → OnEnter() of the new state → The current_state reference is switched.</li>
+        </ol>
+
+        <p><strong>Player State Example: Locomotion to Jump</strong></p>
+        <table class="tech-table">
+            <thead>
+            <tr>
+                <th>Component</th>
+                <th>State A</th>
+                <th>Transition</th>
+                <th>State B</th>
+                <th>Predicate</th>
+                <th>Condition</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Player</td>
+                <td>LocomotionState</td>
+                <td>→</td>
+                <td>JumpState</td>
+                <td>IsRunning&lt;JumpTimer&gt;</td>
+                <td>The player is grounded AND the jump input is pressed.</td>
+            </tr>
+            <tr>
+                <td>Player</td>
+                <td>JumpState</td>
+                <td>→</td>
+                <td>LocomotionState</td>
+                <td>IsGrounded</td>
+                <td>The player's GroundChecker component returns true.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>5. Spawn System</h2>
+        <p><strong>Architecture</strong><br>The spawning system employs the Factory and Strategy patterns for flexibility.</p>
+        <ul>
+            <li>IEntityFactory&lt;T&gt;: Responsible for creating the entity instance.</li>
+            <li>ISpawnPointStrategy: Determines where the entity is spawned.</li>
+            <li>LinearSpawnPointStrategy: Cycles sequentially through points.</li>
+            <li>RandomSpawnPointStrategy: Randomly selects unused points before reshuffling.</li>
+        </ul>
+        <p><strong>Collectible Spawning</strong><br>The CollectibleSpawnManager uses a countdown timer (Spawn Interval) to spawn items only until all configured spawn points have been used (Auto-Stop), demonstrating efficient resource management for level design.</p>
+
+        <h2>6. Platform Types</h2>
+        <p>Level interactivity is provided by several reusable, configurable platform components.</p>
+        <table class="tech-table">
+            <thead>
+            <tr>
+                <th>Platform Type</th>
+                <th>Mechanism</th>
+                <th>Technical Focus</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Timed Platform</td>
+                <td>Toggles all child GameObjects on/off based on Time to Toggle Platform (2s).</td>
+                <td>Time accumulation and object hierarchy manipulation.</td>
+            </tr>
+            <tr>
+                <td>Vanishing Platform</td>
+                <td>Detects Player tag collision, triggers an Animator for a smooth fade over Disappear Time, with an optional Can Reset delay.</td>
+                <td>Collision handling and configurable reset logic.</td>
+            </tr>
+            <tr>
+                <td>Horizontal/Vertical Platform</td>
+                <td>Uses MoveTowards between two defined points/heights, incorporating a Time Delay wait period at each end.</td>
+                <td>Vector mathematics (MoveTowards) and path configuration.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>7. Enemy AI System</h2>
+        <p>The enemy utilizes the State Machine (Wander, Chase, Attack) driven by the Detection System.</p>
+        <p><strong>Enemy States</strong></p>
+        <ul>
+            <li>EnemyWanderState: Patrols using the NavMeshAgent to pathfind to random points within the Wander Radius (10 units).</li>
+            <li>EnemyChaseState: Continuously updates the NavMeshAgent destination to the player's position, triggered by detection.</li>
+            <li>EnemyAttackState: Executes combat logic while respecting the Time Between Attacks cooldown.</li>
+        </ul>
+
+        <h2>8. In-Depth System Analysis: Detection System</h2>
+        <p><strong>Overview</strong><br>The Detection System is designed using the Strategy Pattern (IDetectionStrategy), allowing the PlayerDetector component to swap out its detection algorithm at runtime. This makes the Enemy AI highly flexible and extensible.</p>
+        <p><strong>Cone Detection Strategy Implementation</strong><br>The ConeDetectionStrategy is the default behavior, designed for realistic, yet performant, line-of-sight tracking.</p>
+
+        <p><strong>Parameters</strong></p>
+        <table class="tech-table">
+            <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Purpose</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Detection Angle</td>
+                <td>60°</td>
+                <td>The total width of the vision cone.</td>
+            </tr>
+            <tr>
+                <td>Detection Radius</td>
+                <td>10 units</td>
+                <td>The maximum effective range of the cone.</td>
+            </tr>
+            <tr>
+                <td>Inner Detection Radius</td>
+                <td>5 units</td>
+                <td>A guaranteed detection sphere for close proximity.</td>
+            </tr>
+            <tr>
+                <td>Detection Cooldown</td>
+                <td>1 second</td>
+                <td>Prevents state flickering near the radius edge.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p><strong>Detection Logic (CanDetectPlayer())</strong><br>The detection check utilizes vector math and distance comparisons:</p>
+        <ol>
+            <li>Calculate Direction and Angle: Determine the normalized direction vector from the enemy to the player. The angle θ between the enemy's forward vector (Forward) and the player direction (Dir) is calculated: θ = arccos(Forward • Dir).</li>
+            <li>Cone Check: Player is detected if the distance d &lt; 10 AND the angle θ &lt; 30° (half of the 60° angle).</li>
+            <li>Inner Radius Check: Player is detected if the distance d &lt;= 5 (regardless of angle), covering blind spots or close-range detection.</li>
+            <li>Cooldown Application: If detection occurs, a CountdownTimer is started. The CanDetectPlayer() method returns true for the entire 1-second duration of the timer. This prevents the Enemy AI from rapidly transitioning between Chase and Wander states, ensuring smooth and stable gameplay.</li>
+        </ol>
+
+        <p><strong>Extensibility (Strategy Pattern)</strong><br>To implement a new detection type, a developer only needs to:</p>
+        <ol>
+            <li>Create a new class implementing IDetectionStrategy.</li>
+            <li>Call detector.SetDetectionStrategy(new NewDetectionStrategy()) at runtime.</li>
+        </ol>
+        <p>This adheres to the Open/Closed Principle, allowing for new features without modifying existing, tested code.</p>
+
+        <h2>9. Input System</h2>
+        <p><strong>Design Choice</strong><br>The system uses a ScriptableObject-based InputReader with Unity's new Input System.</p>
+        <p><strong>Benefit</strong><br>This completely separates input logic from the player character, making the system:</p>
+        <ul>
+            <li>Device-Agnostic: Handles keyboard, mouse, and gamepad input seamlessly.</li>
+            <li>Flexible: Easy rebinding and centralized control.</li>
+            <li>Event-Driven: Input phase (Started, Canceled, Performed) → InputReader → Invokes a corresponding UnityEvent (e.g., Jump(bool performed)).</li>
+        </ul>
+
+        <h2>10. Health System</h2>
+        <p><strong>Health Component</strong><br>Manages health and uses the Event Channel pattern for decoupled UI updates. When TakeDamage(int) is called, the component calculates the health percentage (0-1) and broadcasts it on a FloatEventChannel.</p>
+        <p><strong>Health Bar Component</strong><br>This component subscribes to the FloatEventChannel and updates the UI slider and the color gradient (Green → Red) without holding a direct reference to the Player's Health component.</p>
+
+        <h2>11. Summary</h2>
+        <table class="tech-table">
+            <thead>
+            <tr>
+                <th>System</th>
+                <th>Practice</th>
+                <th>Rationale</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>State Machines</td>
+                <td>Separate state logic from entity logic; use predicates for transitions.</td>
+                <td>Ensures single responsibility and ease of debugging.</td>
+            </tr>
+            <tr>
+                <td>Input</td>
+                <td>Use a single InputReader ScriptableObject; always unsubscribe from events.</td>
+                <td>Centralized control and prevention of memory leaks.</td>
+            </tr>
+            <tr>
+                <td>Timers</td>
+                <td>Tick timers in Update, not FixedUpdate; use CountdownTimer.</td>
+                <td>Ensures time is tracked independently of physics frames.</td>
+            </tr>
+            <tr>
+                <td>Detection</td>
+                <td>Tune values with Gizmo visualization; use cooldowns.</td>
+                <td>Prevents state flickering and allows visual configuration.</td>
+            </tr>
+            <tr>
+                <td>Spawning</td>
+                <td>Separate data (ScriptableObject) from logic (MonoBehaviour).</td>
+                <td>Increases modularity and simplifies asset management.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <br><br>
+        <p class="mono" style="color: var(--text-secondary); text-align: center;">
+            Built in Unity
+        </p>
+
+    </div>
+</div>
+<!-- END PLATFORMER VIEW -->
+
+<!-- DWARF BREAKDOWN VIEW WRAPPER (Hidden by default) -->
+<div id="dwarf-view" class="hidden">
 
     <header style="padding: 4rem 0;">
         <div class="container">
@@ -396,9 +724,6 @@ if (elapsedSeconds < updateTarget) {
 float fps = 1.0f / elapsedSeconds;</code></pre>
 
         <p><code>Game::setFPS(int)</code> updates an on-screen counter; a <code>PrintDebugSystem</code> provides additional instrumentation.</p>
-
-        <h3>Tradeoffs and Rigor</h3>
-        <p>Chose a simple fixed-target with sleep for predictable pacing; acceptable for a single-threaded student project. For a production loop, I would separate fixed-step simulation and variable rendering, and account for <code>sleep</code> granularity on Windows.</p>
 
         <h2>Windowing, Views, and Letterboxing</h2>
         <p><code>Window</code> encapsulates creation of <code>sf::RenderWindow</code> in windowed or fullscreen modes. It uses a fixed logical <code>sf::View</code> sized to the game world (<code>logicalViewSize</code>), with a letterbox applied on resize to preserve aspect ratio.</p>
@@ -482,7 +807,7 @@ ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale
             <li>Utilities: <code>include\utils\PackedArray.h</code>, <code>include\utils\Observer.h</code></li>
         </ul>
 
-        <h2>What I’d Highlight in an Application</h2>
+        <h2>Project Highlight</h2>
         <ul>
             <li><strong>Engine architecture:</strong> clear separation of concerns (loop, ECS, rendering, UI) and the ability to swap ECS storage strategies to study performance.</li>
             <li><strong>Data-driven content:</strong> ASCII level files parsed into a tile/actor world with consistent scaling and positioning.</li>
@@ -495,7 +820,7 @@ ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale
         </div>
     </div>
 </div>
-<!-- END BREAKDOWN VIEW -->
+<!-- END DWARF BREAKDOWN VIEW -->
 
 
 <footer>
@@ -509,21 +834,33 @@ ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale
             <a href="#" style="margin: 0 10px;">Download CV</a>
         </div>
         <p class="mono" style="font-size: 0.75rem; opacity: 0.5;">
-            Hand-coded in HTML5/CSS3. Zero JavaScript frameworks.
+           HTML5/CSS3 and JavaScript .
         </p>
     </div>
 </footer>
 
 <script>
     // Simple SPA logic
-    function showBreakdown() {
+    function hideAll() {
         document.getElementById('home-view').classList.add('hidden');
-        document.getElementById('breakdown-view').classList.remove('hidden');
+        document.getElementById('platformer-view').classList.add('hidden');
+        document.getElementById('dwarf-view').classList.add('hidden');
+    }
+
+    function showPlatformer() {
+        hideAll();
+        document.getElementById('platformer-view').classList.remove('hidden');
+        window.scrollTo(0,0);
+    }
+
+    function showDwarf() {
+        hideAll();
+        document.getElementById('dwarf-view').classList.remove('hidden');
         window.scrollTo(0,0);
     }
 
     function showHome() {
-        document.getElementById('breakdown-view').classList.add('hidden');
+        hideAll();
         document.getElementById('home-view').classList.remove('hidden');
         window.scrollTo(0, document.getElementById('work').offsetTop);
     }
