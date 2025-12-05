@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procedural Terrain & AI Pathfinding Demo</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #1a1a1a;
+            color: #eee;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #canvas-container {
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border: 2px solid #333;
+        }
+
+        canvas {
+            display: block;
+            background-color: #0f0f0f;
+        }
+
+        #ui {
+            margin-top: 10px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            border-radius: 8px;
+            pointer-events: none; /* Let clicks pass through if overlapping */
+        }
+
+        .controls {
+            margin-top: 5px;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        button {
+            pointer-events: auto;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+
+<div id="canvas-container">
+    <canvas id="gameCanvas"></canvas>
+</div>
+
+<div id="ui">
+    <h2>Procedural Terrain & AI Pathfinding Chase</h2>
+    <div class="controls">
+        <span style="color:#4ade80">■ Player (WASD)</span> |
+        <span style="color:#f87171">■ AI Enemy (Chasing)</span> |
+        <span style="color:#60a5fa">■ Path</span>
+    </div>
+    <div class="controls">
+        Press <b>R</b> to Regenerate Map | Click Map to Teleport
+    </div>
+    <button onclick="initGame()">Regenerate Terrain (R)</button>
+</div>
+
+<script>
+    /**
+     * Configuration Parameters
+     */
+    const TILE_SIZE = 20; // Size of each grid cell in pixels
+    const MAP_WIDTH = 50; // Map width in tiles
+    const MAP_HEIGHT = 30; // Map height in tiles
+    const SMOOTHING_ITERATIONS = 5; // Number of smoothing passes for terrain generation
+    const FILL_PERCENT = 45; // Initial random wall fill percentage
+    const FRAME_RATE = 60;
+    const ENEMY_SPEED_FACTOR = 5; // Controls enemy speed (higher is slower)
+
+    // Colors
+    const COLORS = {
+        wall: '#334155',
+        floor: '#0f172a',
+        player: '#4ade80', // Green
+        enemy: '#f87171',  // Red
+        path: 'rgba(96, 165, 250, 0.4)', // Semi-transparent Blue
+        grid: '#1e293b'
+    };
+
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Game State
+    let map = []; // 0: Floor, 1: Wall
+    let player = { x: 1, y: 1 };
+    let enemy = { x: 1, y: 1 };
+    let path = []; // Stores the A* path
+    let gameInterval;
+    let frameCount = 0;
+
+    // Initialize Canvas Size
+    canvas.width = MAP_WIDTH * TILE_SIZE;
+    canvas.height = MAP_HEIGHT * TILE_SIZE;
+
+    // Input Listeners
+    const keys = {};
+    window.addEventListener('keydown', (e) => {
+        keys[e.key.toLowerCase()] = true;
+        if (e.key.toLowerCase() === 'r') initGame();
+    });
+    window.addEventListener('keyup', (e) => keys[e.key.toLowerCase()] = false);
+
+    // Mouse Click Teleportation
+    canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = Math.floor((e.clientX - rect.left) / TILE_SIZE);
+        const y = Math.floor((e.clientY - rect.top) / TILE_SIZE);
+
+        // Check bounds and collision
+        if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT && map[x][y] === 0) {
+            player.x = x;
+            player.y = y;
+            findPath(); // Immediately recalculate path
+            draw();
+        }
+    });
+
+    /**
+     * ------------------------------------------------------------------
+     * 1. Procedural Terrain Generation (Cellular Automata)
+     * ------------------------------------------------------------------
+     */
+    function generateMap() {
+        map = [];
+        // 1. Random Initialization
+        for (let x = 0; x < MAP_WIDTH; x++) {
+            map[x] = [];
+            for (let y = 0; y < MAP_HEIGHT; y++) {
+                // Force borders to be walls
+                if (x === 0 || x === MAP_WIDTH - 1 || y === 0 || y === MAP_HEIGHT - 1) {
+                    map[x][y] = 1;
+                } else {
+                    // Randomly fill
+                    map[x][y] = (Math.random() * 100 < FILL_PERCENT) ? 1 : 0;
+                }
+            }
+        }
+
+        // 2. Smoothing (Simulate organic caves)
+        for (let i = 0; i < SMOOTHING_ITERATIONS; i++) {
+            smoothMap();
+        }
+    }
+
+    function smoothMap() {
+        let newMap = [];
+        for (let x = 0; x < MAP_WIDTH; x++) {
+            newMap[x] = [];
+            for (let y = 0; y < MAP_HEIGHT; y++) {
+                let wallCount = getSurroundingWallCount(x, y);
+
+                // Cellular Automata Rules (The "4-5 Rule")
+                if (wallCount > 4) {
+                    newMap[x][y] = 1; // Become a wall
+                } else if (wallCount < 4) {
+                    newMap[x][y] = 0; // Become floor
+                } else {
+                    newMap[x][y] = map[x][y]; // Stay the same
+                }
+            }
+        }
+        map = newMap;
+    }
+
+    function getSurroundingWallCount(gridX, gridY) {
+        let wallCount = 0;
+        for (let neighborX = gridX - 1; neighborX <= gridX + 1; neighborX++) {
+            for (let neighborY = gridY - 1; neighborY <= gridY + 1; neighborY++) {
+                if (neighborX >= 0 && neighborX < MAP_WIDTH && neighborY >= 0 && neighborY < MAP_HEIGHT) {
+                    if (neighborX !== gridX || neighborY !== gridY) {
+                        wallCount += map[neighborX][neighborY];
+                    }
+                } else {
+                    wallCount++; // Out of bounds counts as a wall
+                }
+            }
+        }
+        return wallCount;
+    }
+
+    /**
+     * Find a free spot (floor) to place an entity
+     */
+    function findFreeSpot() {
+        let attempts = 0;
+        while (attempts < 1000) {
+            let x = Math.floor(Math.random() * MAP_WIDTH);
+            let y = Math.floor(Math.random() * MAP_HEIGHT);
+            if (map[x][y] === 0) {
+                return { x, y };
+            }
+            attempts++;
+        }
+        return { x: 1, y: 1 }; // Fallback
+    }
+
+    /**
+     * ------------------------------------------------------------------
+     * 2. AI Pathfinding Algorithm (A*)
+     * ------------------------------------------------------------------
+     */
+    class Node {
+        constructor(x, y, isWall) {
+            this.x = x;
+            this.y = y;
+            this.isWall = isWall;
+            this.g = 0; // Cost from start
+            this.h = 0; // Heuristic (estimated cost to end)
+            this.f = 0; // Total cost (g + h)
+            this.parent = null;
+        }
+    }
+
+    function findPath() {
+        // Simple A* Implementation
+        let openSet = [];
+        let closedSet = [];
+
+        // Initialize node grid
+        let gridNodes = [];
+        for(let x=0; x<MAP_WIDTH; x++){
+            gridNodes[x] = [];
+            for(let y=0; y<MAP_HEIGHT; y++){
+                gridNodes[x][y] = new Node(x, y, map[x][y] === 1);
+            }
+        }
+
+        let startNode = gridNodes[enemy.x][enemy.y];
+        let targetNode = gridNodes[player.x][player.y];
+
+        // If target is inside a wall (edge case), abort or find nearest
+        if(targetNode.isWall) return;
+
+        openSet.push(startNode);
+
+        while (openSet.length > 0) {
+            // Find node with lowest f score
+            let winner = 0;
+            for (let i = 0; i < openSet.length; i++) {
+                if (openSet[i].f < openSet[winner].f) {
+                    winner = i;
+                }
+            }
+            let current = openSet[winner];
+
+            // Path found?
+            if (current === targetNode) {
+                path = [];
+                let temp = current;
+                while (temp.parent) {
+                    path.push({x: temp.x, y: temp.y});
+                    temp = temp.parent;
+                }
+                path.reverse();
+                return;
+            }
+
+            // Move current from open to closed
+            openSet.splice(winner, 1);
+            closedSet.push(current);
+
+            // Check neighbors
+            let neighbors = getNeighbors(current, gridNodes);
+            for (let i = 0; i < neighbors.length; i++) {
+                let neighbor = neighbors[i];
+
+                if (closedSet.includes(neighbor) || neighbor.isWall) {
+                    continue;
+                }
+
+                // Calculate new g score (assuming cost of 1 for adjacent moves)
+                let tempG = current.g + 1;
+
+                let newPath = false;
+                if (openSet.includes(neighbor)) {
+                    if (tempG < neighbor.g) {
+                        neighbor.g = tempG;
+                        newPath = true;
+                    }
+                } else {
+                    neighbor.g = tempG;
+                    newPath = true;
+                    openSet.push(neighbor);
+                }
+
+                if (newPath) {
+                    neighbor.h = heuristic(neighbor, targetNode);
+                    neighbor.f = neighbor.g + neighbor.h;
+                    neighbor.parent = current;
+                }
+            }
+        }
+
+        // No path found
+        path = [];
+    }
+
+    function getNeighbors(node, gridNodes) {
+        let neighbors = [];
+        let dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]]; // Up, Down, Left, Right (No diagonals)
+
+        for (let dir of dirs) {
+            let x = node.x + dir[0];
+            let y = node.y + dir[1];
+
+            if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
+                neighbors.push(gridNodes[x][y]);
+            }
+        }
+        return neighbors;
+    }
+
+    // Heuristic function (Manhattan Distance)
+    function heuristic(a, b) {
+        return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
+    }
+
+
+    /**
+     * ------------------------------------------------------------------
+     * 3. Game Loop & Rendering
+     * ------------------------------------------------------------------
+     */
+    function update() {
+        frameCount++;
+
+        // Player Movement (WASD + Collision Detection)
+        // Add delay so player doesn't move too fast
+        if (frameCount % 5 === 0) {
+            let dx = 0;
+            let dy = 0;
+            if (keys['w'] || keys['arrowup']) dy = -1;
+            if (keys['s'] || keys['arrowdown']) dy = 1;
+            if (keys['a'] || keys['arrowleft']) dx = -1;
+            if (keys['d'] || keys['arrowright']) dx = 1;
+
+            if (dx !== 0 || dy !== 0) {
+                let targetX = player.x + dx;
+                let targetY = player.y + dy;
+
+                // Collision Check
+                if (targetX >= 0 && targetX < MAP_WIDTH &&
+                    targetY >= 0 && targetY < MAP_HEIGHT &&
+                    map[targetX][targetY] === 0) {
+                    player.x = targetX;
+                    player.y = targetY;
+                    // Recalculate path immediately after player moves
+                    findPath();
+                }
+            }
+        }
+
+        // Enemy Movement
+        if (frameCount % ENEMY_SPEED_FACTOR === 0) {
+            if (path.length > 0) {
+                let nextStep = path[0];
+                enemy.x = nextStep.x;
+                enemy.y = nextStep.y;
+                // Note: We don't shift() the path here because we recalculate it fully below.
+            }
+
+            // Chase Logic: Re-calculate path frequently
+            findPath();
+
+            // Capture Logic (Collision)
+            if (enemy.x === player.x && enemy.y === player.y) {
+                // Caught logic (visual feedback only for this demo)
+            }
+        }
+    }
+
+    function draw() {
+        // Clear Background
+        ctx.fillStyle = COLORS.floor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw Map
+        for (let x = 0; x < MAP_WIDTH; x++) {
+            for (let y = 0; y < MAP_HEIGHT; y++) {
+                if (map[x][y] === 1) {
+                    ctx.fillStyle = COLORS.wall;
+                    ctx.fillRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                } else {
+                    // Draw faint grid lines
+                    ctx.strokeStyle = COLORS.grid;
+                    ctx.lineWidth = 0.5;
+                    ctx.strokeRect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+                }
+            }
+        }
+
+        // Draw Path (A*)
+        if (path.length > 0) {
+            ctx.beginPath();
+            // Start from center of enemy tile
+            ctx.moveTo(enemy.x * TILE_SIZE + TILE_SIZE/2, enemy.y * TILE_SIZE + TILE_SIZE/2);
+            for (let p of path) {
+                ctx.lineTo(p.x * TILE_SIZE + TILE_SIZE/2, p.y * TILE_SIZE + TILE_SIZE/2);
+            }
+            ctx.strokeStyle = COLORS.path;
+            ctx.lineWidth = 4;
+            ctx.stroke();
+
+            // Draw dots at path nodes
+            ctx.fillStyle = COLORS.path;
+            for (let p of path) {
+                ctx.beginPath();
+                ctx.arc(p.x * TILE_SIZE + TILE_SIZE/2, p.y * TILE_SIZE + TILE_SIZE/2, 2, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Draw Player
+        drawEntity(player.x, player.y, COLORS.player);
+
+        // Draw Enemy
+        drawEntity(enemy.x, enemy.y, COLORS.enemy);
+    }
+
+    function drawEntity(gridX, gridY, color) {
+        let x = gridX * TILE_SIZE;
+        let y = gridY * TILE_SIZE;
+        let padding = 2;
+
+        ctx.fillStyle = color;
+        // Draw rounded rect for entities
+        ctx.beginPath();
+        ctx.roundRect(x + padding, y + padding, TILE_SIZE - padding*2, TILE_SIZE - padding*2, 5);
+        ctx.fill();
+
+        // Add a highlight for 3D effect
+        ctx.fillStyle = 'rgba(255,255,255,0.3)';
+        ctx.beginPath();
+        ctx.arc(x + TILE_SIZE/3, y + TILE_SIZE/3, TILE_SIZE/5, 0, Math.PI*2);
+        ctx.fill();
+    }
+
+    function initGame() {
+        generateMap();
+        player = findFreeSpot();
+        enemy = findFreeSpot();
+        // Ensure enemy doesn't spawn too close to player
+        while(Math.abs(enemy.x - player.x) + Math.abs(enemy.y - player.y) < 5) {
+            enemy = findFreeSpot();
+        }
+        findPath();
+        frameCount = 0;
+    }
+
+    function loop() {
+        update();
+        draw();
+        requestAnimationFrame(loop);
+    }
+
+    // Start Game
+    initGame();
+    loop();
+
+</script>
+</body>
+</html>
