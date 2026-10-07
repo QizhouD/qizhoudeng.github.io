@@ -6,197 +6,7 @@
     <meta name="description" content="Qizhou Deng -  Researching AI in Games, PCG, and Player Modeling.">
     <title>Qizhou Deng</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* Palette: Deep Space & Neon Research */
-            --bg-deep: #0a0a0f;
-            --bg-surface: #13131a;
-            --bg-glass: rgba(19, 19, 26, 0.7);
-
-            --text-main: #e0e0e0;
-            --text-muted: #9494a8;
-
-            --accent-primary: #ff3366; /* Electric Coral */
-            --accent-secondary: #00f2ea; /* Cyan for research/code vibes */
-
-            --border: rgba(255, 255, 255, 0.08);
-            --shadow-card: 0 10px 30px -10px rgba(0,0,0,0.5);
-            --glow: 0 0 20px rgba(255, 51, 102, 0.15);
-        }
-
-        /* RESET & BASE */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            background-color: var(--bg-deep);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            background-image:
-                    radial-gradient(circle at 15% 15%, rgba(255, 51, 102, 0.04) 0%, transparent 40%),
-                    radial-gradient(circle at 85% 85%, rgba(0, 242, 234, 0.04) 0%, transparent 40%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* TYPOGRAPHY */
-        h1, h2, h3, h4 { color: #fff; letter-spacing: -0.02em; }
-        h1 { font-weight: 800; font-size: 3.5rem; line-height: 1.1; margin-bottom: 0.5rem; }
-        h2 { font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; }
-        h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.75rem; }
-        h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
-        p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem; max-width: 65ch; }
-
-        .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.9em; }
-        a { color: var(--text-main); text-decoration: none; transition: 0.2s; border-bottom: 1px solid var(--border); cursor: pointer; }
-        a:hover { color: var(--accent-primary); border-color: var(--accent-primary); }
-
-        /* LAYOUT UTILS */
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-        section { margin: 8rem 0; }
-
-        /* HEADER */
-        header {
-            padding: 8rem 0 4rem;
-            border-bottom: 1px solid var(--border);
-            background: linear-gradient(to bottom, rgba(10,10,15,0), var(--bg-deep));
-        }
-        .intro-tags {
-            display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;
-            font-family: 'JetBrains Mono', monospace; color: var(--accent-secondary);
-        }
-
-        /* PROJECTS (The Core) */
-        .project-card {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr; /* Image wider than text */
-            gap: 3rem;
-            margin-bottom: 6rem;
-            align-items: center;
-        }
-
-        /* Alternating layout for variety */
-        .project-card:nth-child(even) { grid-template-columns: 1fr 1.2fr; }
-        .project-card:nth-child(even) .media-frame { order: 2; }
-
-        .media-frame {
-            position: relative;
-            background: #000;
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 16/9;
-            box-shadow: var(--shadow-card);
-            border: 1px solid var(--border);
-            transition: transform 0.3s ease;
-        }
-        .media-frame:hover { transform: translateY(-5px); border-color: var(--accent-secondary); }
-
-        iframe { width: 100%; height: 100%; border: none; }
-
-        .project-meta h3 { font-size: 2rem; margin-bottom: 0.5rem; }
-        .project-sub { color: var(--accent-primary); font-weight: 600; margin-bottom: 1rem; display: block; }
-
-        .tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
-        .tech-pill {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--border);
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            color: var(--text-main);
-        }
-
-        .actions { display: flex; gap: 1.5rem; font-weight: 600; }
-        .btn-link {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            border-bottom: 2px solid var(--accent-secondary);
-            padding-bottom: 2px;
-            cursor: pointer;
-        }
-        .btn-link:hover { color: var(--accent-secondary); }
-
-        /* PUBLICATIONS / SKILLS GRID */
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
-
-        .pub-item {
-            margin-bottom: 1.5rem; padding-left: 1rem;
-            border-left: 2px solid var(--border); transition: 0.2s;
-        }
-        .pub-item:hover { border-left-color: var(--accent-primary); }
-        .pub-title { color: #fff; font-weight: 600; display: block; }
-        .pub-venue { font-style: italic; color: var(--accent-secondary); font-size: 0.9rem; }
-
-        .skill-list { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
-        .skill-list li::before { content: "▹"; color: var(--accent-primary); margin-right: 0.5rem; }
-
-        /* FOOTER */
-        footer {
-            margin-top: auto;
-            text-align: center; padding: 4rem 0;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted); font-size: 0.9rem;
-        }
-
-        /* BREAKDOWN VIEW STYLES */
-        .article-content {
-            margin-top: 4rem;
-            max-width: 800px;
-        }
-
-        .article-content h2 {
-            margin-top: 3rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .article-content h3 {
-            margin-top: 2rem;
-            color: var(--text-main);
-        }
-
-        .article-content ul {
-            margin-bottom: 1.5rem;
-            margin-left: 1.5rem;
-            color: var(--text-muted);
-        }
-
-        .article-content li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* CODE BLOCK STYLES */
-        pre {
-            background: #0d0d12;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.2rem;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        code {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: #dcdcdc;
-            line-height: 1.5;
-        }
-
-        /* Helper for the SPA Toggle */
-        .hidden { display: none !important; }
-
-        /* RESPONSIVE */
-        @media (max-width: 900px) {
-            h1 { font-size: 2.5rem; }
-            .project-card, .project-card:nth-child(even) {
-                grid-template-columns: 1fr; gap: 1.5rem;
-            }
-            .media-frame { order: 0 !important; } /* Image always top on mobile */
-            .grid-2 { grid-template-columns: 1fr; gap: 2rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="portfolio.css?v=5">
 </head>
 <body>
 
@@ -204,16 +14,33 @@
 <div id="home-view">
 
     <header>
-        <div class="container">
-            <h1>Qizhou Deng</h1>
-            <p>
-                Interested in •<strong>Game Development</strong> <strong>•AI in Games </strong>•<strong> Player Modeling </strong>•<strong> Procedural Content Generation </strong>• <strong>Systems Programming</strong>
-            </p>
-            <div class="intro-tags">
-                <span>> AI_in_Games</span>
-                <span>> C++</span>
-                <span>> Unity</span>
-                <span>> PCG</span>
+        <div class="container hero-layout">
+            <div class="hero-copy">
+                <h1>Qizhou Deng</h1>
+                <p class="research-focus">Game AI · Digital Humans · Player Modeling · Computational Media</p>
+                <p class="research-interests">
+                    Interested in •<strong>Game Development</strong> <strong>•AI in Games </strong>•<strong> Player Modeling </strong>•<strong> Procedural Content Generation </strong>• <strong>Systems Programming</strong>
+                </p>
+                <div class="intro-tags">
+                    <span>> AI_in_Games</span>
+                    <span>> C++</span>
+                    <span>> Unity</span>
+                    <span>> PCG</span>
+                </div>
+                <div class="profile-links">
+                    <a href="https://www.linkedin.com/in/qizhou-deng-935728208/" style="margin: 0 10px;">LinkedIn</a>
+                    <a href="https://github.com/QizhouD" style="margin: 0 10px;">GitHub</a>
+                    <a href="Qizhou Deng-CV.docx" style="margin: 0 10px;">Download CV</a>
+                </div>
+            </div>
+            <div class="pixel-scene" aria-hidden="true">
+                <div class="scene-toolbar" aria-hidden="true"><i></i><i></i><i></i><span></span></div>
+                <div class="scene-viewport">
+                    <div class="scene-floor" aria-hidden="true"></div>
+                    <div class="voxel-world" aria-hidden="true"></div>
+                    <span class="scene-cross scene-cross--one"></span>
+                    <span class="scene-cross scene-cross--two"></span>
+                </div>
             </div>
         </div>
     </header>
@@ -221,9 +48,9 @@
     <div class="container">
 
         <section id="work">
-            <h2 style="border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 3rem;">Selected Projects</h2>
+            <h2 class="section-label">Selected Projects</h2>
 
-            <article class="project-card">
+            <article class="project-card project-card--featured">
                 <div class="media-frame">
                     <video autoplay muted loop playsinline
                            poster="fps-ai-coach-war-room.png"
@@ -278,53 +105,31 @@
 
             <article class="project-card">
                 <div class="media-frame">
-                    <iframe frameborder="0" src="https://itch.io/embed/4102404" width="552" height="167"><a href="https://masterjim.itch.io/super-platformer">Super-Platformer by masterjim</a></iframe>                </div>
+                    <img src="navigation-cover.png" alt="Player Navigation Modeling Cover" style="width:100%; height:100%; object-fit:cover;">
+                </div>
                 <div class="project-meta">
-                    <h3>3D Platformer Systems</h3>
-                    <span class="project-sub">Real Time Platformer Game</span>
+                    <h3>Modeling Player Navigation in Games</h3>
+                    <span class="project-sub">Game User Research & AI Literature Review</span>
                     <p>
-                        A scalable game architecture featuring a modular State Machine for character behavior and Strategy Pattern-based Enemy AI. Implements a fully decoupled event-driven input system and ScriptableObject architecture for robust maintainability and testability.
+                        Critical review of player navigation modeling techniques in GUR. Analyzed visual analytics tools (VU-Flow, landmark detection), pathfinding algorithms (A*, DPA hybrids, RRT), and industry practices (The Last of Us NPC AI). Identified key research gaps in sim-to-real validation and audiovisual cues.
                     </p>
                     <div class="tech-stack mono">
-                        <span class="tech-pill">Unity 3D</span>
-                        <span class="tech-pill">C#</span>
-                        <span class="tech-pill">State Pattern</span>
-                        <span class="tech-pill">ScriptableObjects</span>
+                        <span class="tech-pill">Game User Research</span>
+                        <span class="tech-pill">Player Modeling</span>
+                        <span class="tech-pill">Pathfinding</span>
+                        <span class="tech-pill">NavMesh AI</span>
+                        <span class="tech-pill">CHI PLAY / CoG</span>
                     </div>
                     <div class="actions">
-                        <!-- Update links as needed -->
-                        <a onclick="showPlatformer()" class="btn-link">Tech Breakdown</a>
-                        <a href="https://github.com/QizhouD/Super-Platformer-3D" target="_blank" class="btn-link">View GitHub</a>
+                        <a href="Case Study.pdf" target="_blank" class="btn-link">View Case Study</a>
+                        <a href="Modelling player navigation.pdf" target="_blank" class="btn-link">View Essay</a>
                     </div>
                 </div>
             </article>
 
-            <article class="project-card">
-                <div class="media-frame">
-                    <iframe  src="https://www.youtube.com/embed/WgniXyY80Is?si=HhnHrWssUFyCjc2Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <div class="project-meta">
-                    <h3>Dwarf V.S Mushroom</h3>
-                    <span class="project-sub">Custom C++ Game </span>
-                    <p>
-                        A 2D action-platformer built from scratch to demonstrate low-level systems mastery. Features a custom Entity-Component System (ECS), memory pooling for particle effects, and a hand-written AABB physics solver.
-                    </p>
-                    <div class="tech-stack mono">
-                        <span class="tech-pill">C++</span>
-                        <span class="tech-pill">SFML</span>
-                        <span class="tech-pill">Data-Oriented Design</span>
-                    </div>
-                    <div class="actions">
-                        <!-- UPDATED LINK: Calls the JS function to switch views -->
-                        <a onclick="showDwarf()" class="btn-link">Tech Breakdown</a>
-                        <a href="https://github.com/QizhouD/2D-action-game" target="_blank" class="btn-link">View GitHub</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="project-card">
+            <article class="project-card project-card--wide">
                 <div class="media-frame" style="position: relative; background:#000;">
-                    <canvas id="gameCanvas" style="width:100%; height:100%; object-fit: contain;"></canvas>
+                    <canvas id="gameCanvas" tabindex="0" aria-label="Procedural cave generation and A-star pathfinding demo" style="width:100%; height:100%; object-fit: contain;"></canvas>
                     <div class="game-overlay">
                         WASD to Move • R to Regen • Click to Teleport
                     </div>
@@ -351,24 +156,46 @@
 
             <article class="project-card">
                 <div class="media-frame">
-                    <img src="navigation-cover.png" alt="Player Navigation Modeling Cover" style="width:100%; height:100%; object-fit:cover;">
-                </div>
+                    <iframe title="Super-Platformer on itch.io" frameborder="0" src="https://itch.io/embed/4102404" width="552" height="167"><a href="https://masterjim.itch.io/super-platformer">Super-Platformer by masterjim</a></iframe>                </div>
                 <div class="project-meta">
-                    <h3>Modeling Player Navigation in Games</h3>
-                    <span class="project-sub">Game User Research & AI Literature Review</span>
+                    <h3>3D Platformer Systems</h3>
+                    <span class="project-sub">Real Time Platformer Game</span>
                     <p>
-                        Critical review of player navigation modeling techniques in GUR. Analyzed visual analytics tools (VU-Flow, landmark detection), pathfinding algorithms (A*, DPA hybrids, RRT), and industry practices (The Last of Us NPC AI). Identified key research gaps in sim-to-real validation and audiovisual cues.
+                        A scalable game architecture featuring a modular State Machine for character behavior and Strategy Pattern-based Enemy AI. Implements a fully decoupled event-driven input system and ScriptableObject architecture for robust maintainability and testability.
                     </p>
                     <div class="tech-stack mono">
-                        <span class="tech-pill">Game User Research</span>
-                        <span class="tech-pill">Player Modeling</span>
-                        <span class="tech-pill">Pathfinding</span>
-                        <span class="tech-pill">NavMesh AI</span>
-                        <span class="tech-pill">CHI PLAY / CoG</span>
+                        <span class="tech-pill">Unity 3D</span>
+                        <span class="tech-pill">C#</span>
+                        <span class="tech-pill">State Pattern</span>
+                        <span class="tech-pill">ScriptableObjects</span>
                     </div>
                     <div class="actions">
-                        <a href="Case Study.pdf" target="_blank" class="btn-link">View Case Study</a>
-                        <a href="Modelling player navigation.pdf" target="_blank" class="btn-link">View Essay</a>
+                        <!-- Update links as needed -->
+                        <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showPlatformer()" class="btn-link">Tech Breakdown</a>
+                        <a href="https://github.com/QizhouD/Super-Platformer-3D" target="_blank" class="btn-link">View GitHub</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="media-frame">
+                    <iframe  src="https://www.youtube.com/embed/WgniXyY80Is?si=HhnHrWssUFyCjc2Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="project-meta">
+                    <h3>Dwarf V.S Mushroom</h3>
+                    <span class="project-sub">Custom C++ Game </span>
+                    <p>
+                        A 2D action-platformer built from scratch to demonstrate low-level systems mastery. Features a custom Entity-Component System (ECS), memory pooling for particle effects, and a hand-written AABB physics solver.
+                    </p>
+                    <div class="tech-stack mono">
+                        <span class="tech-pill">C++</span>
+                        <span class="tech-pill">SFML</span>
+                        <span class="tech-pill">Data-Oriented Design</span>
+                    </div>
+                    <div class="actions">
+                        <!-- UPDATED LINK: Calls the JS function to switch views -->
+                        <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showDwarf()" class="btn-link">Tech Breakdown</a>
+                        <a href="https://github.com/QizhouD/2D-action-game" target="_blank" class="btn-link">View GitHub</a>
                     </div>
                 </div>
             </article>
@@ -416,7 +243,7 @@
 
     <header style="padding: 4rem 0;">
         <div class="container">
-            <a onclick="showHome()" class="btn-link" style="margin-bottom: 2rem; border: none; font-size: 0.9rem;">← Back to Projects</a>
+            <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showHome()" class="btn-link" style="margin-bottom: 2rem; border: none; font-size: 0.9rem;">← Back to Projects</a>
             <h1>3D Platformer Systems</h1>
             <p class="mono" style="color: var(--accent-secondary);">Technical Breakdown & Design Document</p>
         </div>
@@ -742,7 +569,7 @@
 
     <header style="padding: 4rem 0;">
         <div class="container">
-            <a onclick="showHome()" class="btn-link" style="margin-bottom: 2rem; border: none; font-size: 0.9rem;">← Back to Projects</a>
+            <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showHome()" class="btn-link" style="margin-bottom: 2rem; border: none; font-size: 0.9rem;">← Back to Projects</a>
             <h1>Dwarf V.S Mushroom</h1>
             <p class="mono" style="color: var(--accent-secondary);">Technical Breakdown & Design Document</p>
         </div>
@@ -899,7 +726,7 @@ ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale
         </ul>
 
         <div style="margin-top: 4rem; text-align: center;">
-            <a onclick="showHome()" class="btn-link" style="font-size: 1.2rem;">← Back to Projects</a>
+            <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showHome()" class="btn-link" style="font-size: 1.2rem;">← Back to Projects</a>
         </div>
     </div>
 </div>
@@ -911,11 +738,7 @@ ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale
         <p style="margin-bottom: 0.5rem; color: #fff;">
             <strong>Qizhou Deng</strong> • qizhoudeng0@gmail.com
         </p>
-        <div style="margin-bottom: 2rem;">
-            <a href="https://www.linkedin.com/in/qizhou-deng-935728208/" style="margin: 0 10px;">LinkedIn</a>
-            <a href="https://github.com/QizhouD" style="margin: 0 10px;">GitHub</a>
-            <a href="Qizhou Deng-CV.docx" style="margin: 0 10px;">Download CV</a>
-        </div>
+
         <p class="mono" style="font-size: 0.75rem; opacity: 0.5;">
            HTML5/CSS3 and JavaScript .
         </p>
@@ -984,6 +807,7 @@ ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale
     // Input
     const keys = {};
     window.addEventListener('keydown', (e) => {
+        if (document.activeElement !== canvas) return;
         // Prevent scrolling when using arrow keys or space
         if(["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"," "].indexOf(e.code) > -1) {
             e.preventDefault();
@@ -992,9 +816,11 @@ ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale
         if (e.key.toLowerCase() === 'r') initGame();
     });
     window.addEventListener('keyup', (e) => keys[e.key.toLowerCase()] = false);
+    canvas.addEventListener('blur', () => { for (const key in keys) keys[key] = false; });
 
     // Mouse Teleport
     canvas.addEventListener('mousedown', (e) => {
+        canvas.focus({ preventScroll: true });
         const rect = canvas.getBoundingClientRect();
         // Calculate scale factor because canvas is styled with CSS width 100%
         const scaleX = canvas.width / rect.width;
@@ -1236,18 +1062,31 @@ ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale
         while(Math.abs(enemy.x - player.x) + Math.abs(enemy.y - player.y) < 5) enemy = findFreeSpot();
         findPath();
         frameCount = 0;
+        draw();
     }
 
     function loop() {
-        update();
-        draw();
+        if (!motionPreference.matches || document.activeElement === canvas) {
+            update();
+            draw();
+        }
         requestAnimationFrame(loop);
     }
 
-    // Start
+    // Motion preference applies to both the preview and the existing simulation.
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const previewVideo = document.querySelector('#home-view video');
+    function applyMotionPreference() {
+        previewVideo.controls = true;
+        if (motionPreference.matches) previewVideo.pause();
+        else previewVideo.play().catch(() => {});
+    }
+    motionPreference.addEventListener('change', applyMotionPreference);
+    applyMotionPreference();
     initGame();
     loop();
 </script>
 
+    <script src="pixel-scene.js?v=4" defer></script>
 </body>
 </html>
