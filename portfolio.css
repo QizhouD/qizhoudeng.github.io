@@ -73,6 +73,9 @@ section { margin: 48px 0 64px; }
 .project-card:hover, .project-card:focus-within { border-color: var(--accent-secondary); }
 .media-frame { position: relative; width: 100%; aspect-ratio: 16 / 9; flex: none; overflow: hidden; background: #000; border: 1px solid var(--border); border-radius: 2px; }
 .media-frame > img, .media-frame > video, .media-frame > iframe { display: block; width: 100%; height: 100%; }
+/* Faculty plots are taller than 16:9; show both pred-vs-GT figures in full. */
+.media-frame--stack { aspect-ratio: auto; height: auto; display: flex; flex-direction: column; gap: 8px; overflow: visible; background: #0b0f14; }
+.media-frame--stack > img { width: 100%; height: auto; object-fit: contain; }
 iframe { border: 0; }
 .project-meta { display: flex; flex-direction: column; flex: 1; min-width: 0; padding: 24px 16px 16px; }
 .project-meta h3 { font-size: 1.375rem; margin-bottom: 12px; }
