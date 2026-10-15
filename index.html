@@ -6,7 +6,7 @@
     <meta name="description" content="Qizhou Deng -  Researching AI in Games, PCG, and Player Modeling.">
     <title>Qizhou Deng</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="portfolio.css?v=6">
+    <link rel="stylesheet" href="portfolio.css?v=7">
 </head>
 <body>
 
@@ -80,19 +80,45 @@
             </article>
 
             <article class="project-card project-card--featured">
-                <div class="media-frame media-frame--stack">
-                    <img src="assets/trajectory-baseline-2d-collide-pred-vs-gt.png"
-                         alt="Deterministic baseline: predicted vs ground-truth 2D root trajectories with circular obstacles"
-                         style="width:100%; height:auto; object-fit:contain; background:#0b0f14;">
-                    <img src="assets/trajectory-baseline-2d-path-pred-vs-gt.png"
-                         alt="Deterministic baseline: predicted vs ground-truth 2D root trajectories on the path task"
-                         style="width:100%; height:auto; object-fit:contain; background:#0b0f14; margin-top:0.5rem;">
+                <div class="project-media-column">
+                    <div class="media-frame">
+                        <video autoplay muted loop playsinline
+                               aria-label="Unity digital-human embodiment game demo — LLM-driven NPC with a mock navigation plan (not live learned trajectory output)"
+                               style="width:100%; height:100%; object-fit:cover;">
+                            <source src="llm-npc-embodiment-demo.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="media-carousel"
+                         data-carousel
+                         tabindex="0"
+                         role="region"
+                         aria-roledescription="carousel"
+                         aria-label="Deterministic baseline trajectory figures">
+                        <div class="carousel-viewport">
+                            <div class="carousel-track">
+                                <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 2">
+                                    <img src="assets/trajectory-baseline-2d-collide-pred-vs-gt.png"
+                                         alt="Deterministic baseline: predicted vs ground-truth 2D root trajectories with circular obstacles">
+                                </figure>
+                                <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 2" aria-hidden="true">
+                                    <img src="assets/trajectory-baseline-2d-path-pred-vs-gt.png"
+                                         alt="Deterministic baseline: predicted vs ground-truth 2D root trajectories on the path task">
+                                </figure>
+                            </div>
+                        </div>
+                        <button type="button" class="carousel-btn carousel-btn--prev" aria-label="Previous figure" data-carousel-prev>&lsaquo;</button>
+                        <button type="button" class="carousel-btn carousel-btn--next" aria-label="Next figure" data-carousel-next>&rsaquo;</button>
+                        <div class="carousel-dots" role="tablist" aria-label="Choose figure">
+                            <button type="button" class="carousel-dot" role="tab" aria-selected="true" aria-label="Obstacle collide episode" data-carousel-goto="0"></button>
+                            <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-label="Path episode" data-carousel-goto="1" tabindex="-1"></button>
+                        </div>
+                    </div>
                 </div>
                 <div class="project-meta">
                     <h3>Language-conditioned generative trajectory planning for real-time digital humans</h3>
-                    <span class="project-sub">Research MVP · real-time digital humans · 2D root trajectories</span>
+                    <span class="project-sub">Research MVP · Unity embodiment demo · 2D root trajectories</span>
                     <p>
-                        Short-horizon root-motion planning for digital humans: the planner conditions on recent motion, a local goal, nearby obstacles, and a high-level language intent (idle / walk / turn / stop / wave). It samples candidate planar trajectories at 10&nbsp;Hz, rejects unsafe candidates, ranks the rest, and executes only the first segment before replanning. Stack includes conditional flow matching plus a deterministic Transformer baseline on synthetic navigation scenes with circular obstacles. Faculty figures below show baseline pred-vs-GT on obstacle and path episodes (ADE/FDE-style inspection). Full-body text-to-motion and live Unity handshake are next, not claimed here.
+                        Short-horizon root-motion planning for digital humans: the planner conditions on recent motion, a local goal, nearby obstacles, and a high-level language intent (idle / walk / turn / stop / wave). It samples candidate planar trajectories at 10&nbsp;Hz, rejects unsafe candidates, ranks the rest, and executes only the first segment before replanning. Stack includes conditional flow matching plus a deterministic Transformer baseline on synthetic navigation scenes with circular obstacles. The featured video is a Unity LLM-NPC embodiment loop with a <strong>mock</strong> plan for in-game locomotion—not the learned planner UI or a live model handshake. Carousel: baseline pred-vs-GT on obstacle and path episodes (ADE/FDE-style inspection). Full-body text-to-motion and live Unity handshake are next, not claimed here.
                     </p>
                     <div class="tech-stack mono">
                         <span class="tech-pill">Python</span>
@@ -103,6 +129,53 @@
                     </div>
                     <div class="actions">
                         <a href="https://github.com/QizhouD/language-conditioned-generative-trajectory-planning-for-real-time-digital-humans" target="_blank" class="btn-link">View GitHub</a>
+                        <a href="llm-npc-embodiment-demo.mp4" class="btn-link">Embodiment Demo Video</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="media-frame">
+                    <iframe title="Super-Platformer on itch.io" frameborder="0" src="https://itch.io/embed/4102404" width="552" height="167"><a href="https://masterjim.itch.io/super-platformer">Super-Platformer by masterjim</a></iframe>                </div>
+                <div class="project-meta">
+                    <h3>3D Platformer Systems</h3>
+                    <span class="project-sub">Real Time Platformer Game</span>
+                    <p>
+                        A scalable game architecture featuring a modular State Machine for character behavior and Strategy Pattern-based Enemy AI. Implements a fully decoupled event-driven input system and ScriptableObject architecture for robust maintainability and testability.
+                    </p>
+                    <div class="tech-stack mono">
+                        <span class="tech-pill">Unity 3D</span>
+                        <span class="tech-pill">C#</span>
+                        <span class="tech-pill">State Pattern</span>
+                        <span class="tech-pill">ScriptableObjects</span>
+                    </div>
+                    <div class="actions">
+                        <!-- Update links as needed -->
+                        <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showPlatformer()" class="btn-link">Tech Breakdown</a>
+                        <a href="https://github.com/QizhouD/Super-Platformer-3D" target="_blank" class="btn-link">View GitHub</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <div class="media-frame">
+                    <iframe  src="https://www.youtube.com/embed/WgniXyY80Is?si=HhnHrWssUFyCjc2Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <div class="project-meta">
+                    <h3>Dwarf V.S Mushroom</h3>
+                    <span class="project-sub">Custom C++ Game </span>
+                    <p>
+                        A 2D action-platformer built from scratch to demonstrate low-level systems mastery. Features a custom Entity-Component System (ECS), memory pooling for particle effects, and a hand-written AABB physics solver.
+                    </p>
+                    <div class="tech-stack mono">
+                        <span class="tech-pill">C++</span>
+                        <span class="tech-pill">SFML</span>
+                        <span class="tech-pill">Data-Oriented Design</span>
+                    </div>
+                    <div class="actions">
+                        <!-- UPDATED LINK: Calls the JS function to switch views -->
+                        <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showDwarf()" class="btn-link">Tech Breakdown</a>
+                        <a href="https://github.com/QizhouD/2D-action-game" target="_blank" class="btn-link">View GitHub</a>
                     </div>
                 </div>
             </article>
@@ -178,52 +251,6 @@
                     <div class="actions">
                         <a href="#" class="btn-link" onclick="initGame(); return false;">Regenerate Map</a>
                         <a href="https://github.com/QizhouD/PCG-AI-Unity.git" class="btn-link btn-secondary">View GitHub</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="project-card">
-                <div class="media-frame">
-                    <iframe title="Super-Platformer on itch.io" frameborder="0" src="https://itch.io/embed/4102404" width="552" height="167"><a href="https://masterjim.itch.io/super-platformer">Super-Platformer by masterjim</a></iframe>                </div>
-                <div class="project-meta">
-                    <h3>3D Platformer Systems</h3>
-                    <span class="project-sub">Real Time Platformer Game</span>
-                    <p>
-                        A scalable game architecture featuring a modular State Machine for character behavior and Strategy Pattern-based Enemy AI. Implements a fully decoupled event-driven input system and ScriptableObject architecture for robust maintainability and testability.
-                    </p>
-                    <div class="tech-stack mono">
-                        <span class="tech-pill">Unity 3D</span>
-                        <span class="tech-pill">C#</span>
-                        <span class="tech-pill">State Pattern</span>
-                        <span class="tech-pill">ScriptableObjects</span>
-                    </div>
-                    <div class="actions">
-                        <!-- Update links as needed -->
-                        <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showPlatformer()" class="btn-link">Tech Breakdown</a>
-                        <a href="https://github.com/QizhouD/Super-Platformer-3D" target="_blank" class="btn-link">View GitHub</a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="project-card">
-                <div class="media-frame">
-                    <iframe  src="https://www.youtube.com/embed/WgniXyY80Is?si=HhnHrWssUFyCjc2Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <div class="project-meta">
-                    <h3>Dwarf V.S Mushroom</h3>
-                    <span class="project-sub">Custom C++ Game </span>
-                    <p>
-                        A 2D action-platformer built from scratch to demonstrate low-level systems mastery. Features a custom Entity-Component System (ECS), memory pooling for particle effects, and a hand-written AABB physics solver.
-                    </p>
-                    <div class="tech-stack mono">
-                        <span class="tech-pill">C++</span>
-                        <span class="tech-pill">SFML</span>
-                        <span class="tech-pill">Data-Oriented Design</span>
-                    </div>
-                    <div class="actions">
-                        <!-- UPDATED LINK: Calls the JS function to switch views -->
-                        <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showDwarf()" class="btn-link">Tech Breakdown</a>
-                        <a href="https://github.com/QizhouD/2D-action-game" target="_blank" class="btn-link">View GitHub</a>
                     </div>
                 </div>
             </article>
@@ -798,6 +825,56 @@ ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale
         document.getElementById('home-view').classList.remove('hidden');
         window.scrollTo(0, document.getElementById('work').offsetTop);
     }
+
+    function initProjectCarousels() {
+        document.querySelectorAll('[data-carousel]').forEach((root) => {
+            const track = root.querySelector('.carousel-track');
+            const slides = Array.from(root.querySelectorAll('.carousel-slide'));
+            const dots = Array.from(root.querySelectorAll('.carousel-dot'));
+            const prevBtn = root.querySelector('[data-carousel-prev]');
+            const nextBtn = root.querySelector('[data-carousel-next]');
+            if (!track || slides.length === 0) return;
+
+            let index = 0;
+
+            function goTo(nextIndex) {
+                index = (nextIndex + slides.length) % slides.length;
+                track.style.transform = 'translate3d(-' + (index * 100) + '%, 0, 0)';
+                slides.forEach((slide, i) => {
+                    const active = i === index;
+                    slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+                    slide.setAttribute('aria-label', (i + 1) + ' of ' + slides.length);
+                });
+                dots.forEach((dot, i) => {
+                    const active = i === index;
+                    dot.setAttribute('aria-selected', active ? 'true' : 'false');
+                    dot.tabIndex = active ? 0 : -1;
+                });
+            }
+
+            prevBtn?.addEventListener('click', () => goTo(index - 1));
+            nextBtn?.addEventListener('click', () => goTo(index + 1));
+            dots.forEach((dot) => {
+                dot.addEventListener('click', () => {
+                    const target = Number(dot.getAttribute('data-carousel-goto'));
+                    if (!Number.isNaN(target)) goTo(target);
+                });
+            });
+            root.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft') {
+                    event.preventDefault();
+                    goTo(index - 1);
+                } else if (event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    goTo(index + 1);
+                }
+            });
+
+            goTo(index);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', initProjectCarousels);
     /**
      * --- GAME LOGIC INTEGRATION ---
      */
