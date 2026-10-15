@@ -84,15 +84,15 @@
                     <img src="assets/trajectory-baseline-2d-collide-pred-vs-gt.png"
                          alt="Deterministic baseline: predicted vs ground-truth 2D root trajectories with circular obstacles"
                          style="width:100%; height:auto; object-fit:contain; background:#0b0f14;">
-                    <img src="assets/trajectory-baseline-2d-empty-path-pred-vs-gt.png"
-                         alt="Deterministic baseline: predicted vs ground-truth 2D root trajectories on an empty path"
+                    <img src="assets/trajectory-baseline-2d-path-pred-vs-gt.png"
+                         alt="Deterministic baseline: predicted vs ground-truth 2D root trajectories on the path task"
                          style="width:100%; height:auto; object-fit:contain; background:#0b0f14; margin-top:0.5rem;">
                 </div>
                 <div class="project-meta">
-                    <h3>Language-Conditioned Generative Trajectory Planning</h3>
+                    <h3>Language-conditioned generative trajectory planning for real-time digital humans</h3>
                     <span class="project-sub">Research MVP · real-time digital humans · 2D root trajectories</span>
                     <p>
-                        Short-horizon root-motion planning for digital humans: the planner conditions on recent motion, a local goal, nearby obstacles, and a high-level language intent (idle / walk / turn / stop / wave). It samples candidate planar trajectories at 10&nbsp;Hz, rejects unsafe candidates, ranks the rest, and executes only the first segment before replanning. Stack includes conditional flow matching plus a deterministic Transformer baseline on synthetic navigation scenes with circular obstacles. Faculty figures below show baseline pred-vs-GT on obstacle and empty-path episodes (ADE/FDE-style inspection). Full-body text-to-motion and live Unity handshake are next, not claimed here.
+                        Short-horizon root-motion planning for digital humans: the planner conditions on recent motion, a local goal, nearby obstacles, and a high-level language intent (idle / walk / turn / stop / wave). It samples candidate planar trajectories at 10&nbsp;Hz, rejects unsafe candidates, ranks the rest, and executes only the first segment before replanning. Stack includes conditional flow matching plus a deterministic Transformer baseline on synthetic navigation scenes with circular obstacles. Faculty figures below show baseline pred-vs-GT on obstacle and path episodes (ADE/FDE-style inspection). Full-body text-to-motion and live Unity handshake are next, not claimed here.
                     </p>
                     <div class="tech-stack mono">
                         <span class="tech-pill">Python</span>
