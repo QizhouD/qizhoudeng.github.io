@@ -160,7 +160,11 @@
 
             <article class="project-card">
                 <div class="media-frame">
-                    <iframe  src="https://www.youtube.com/embed/WgniXyY80Is?si=HhnHrWssUFyCjc2Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <video autoplay muted loop playsinline
+                           aria-label="Dwarf &amp; Fire gameplay — the dwarf clears mushroom mazes with an axe and fireballs across four levels"
+                           style="width:100%; height:100%; object-fit:contain;">
+                        <source src="dwarf-and-fire-demo.mp4" type="video/mp4">
+                    </video>
                 </div>
                 <div class="project-meta">
                     <h3>Dwarf &amp; Fire</h3>
@@ -178,6 +182,7 @@
                         <!-- UPDATED LINK: Calls the JS function to switch views -->
                         <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showDwarf()" class="btn-link">Tech Breakdown</a>
                         <a href="https://github.com/QizhouD/2D-action-game" target="_blank" class="btn-link">View GitHub</a>
+                        <a href="dwarf-and-fire-demo.mp4" class="btn-link">Gameplay Video</a>
                     </div>
                 </div>
             </article>
@@ -1169,16 +1174,7 @@ ent-&gt;setPosition(x + cntrFactor, y + cntrFactor);</code></pre>
         requestAnimationFrame(loop);
     }
 
-    // Motion preference applies to both the preview and the existing simulation.
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const previewVideo = document.querySelector('#home-view video');
-    function applyMotionPreference() {
-        previewVideo.controls = true;
-        if (motionPreference.matches) previewVideo.pause();
-        else previewVideo.play().catch(() => {});
-    }
-    motionPreference.addEventListener('change', applyMotionPreference);
-    applyMotionPreference();
     initGame();
     loop();
 </script>
