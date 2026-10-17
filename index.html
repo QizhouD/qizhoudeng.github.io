@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Qizhou Deng -  Researching AI in Games, PCG, and Player Modeling.">
+    <meta name="description" content="Qizhou Deng — Game AI and Computational Media: trajectory generation for digital humans, player modeling, and procedural content generation.">
     <title>Qizhou Deng</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="portfolio.css?v=7">
@@ -19,18 +19,17 @@
                 <h1>Qizhou Deng</h1>
                 <p class="research-focus">Game AI · Digital Humans · Player Modeling · Computational Media</p>
                 <p class="research-interests">
-                    Interested in •<strong>Game Development</strong> <strong>•AI in Games </strong>•<strong> Player Modeling </strong>•<strong> Procedural Content Generation </strong>• <strong>Systems Programming</strong>
+                    Interested in <strong>language-conditioned motion and trajectory generation</strong> for interactive digital humans, <strong>multimodal player modeling</strong> and performance analytics in games, and <strong>search-based Game AI</strong> and procedural content generation.
                 </p>
                 <div class="intro-tags">
-                    <span>> AI_in_Games</span>
-                    <span>> C++</span>
-                    <span>> Unity</span>
-                    <span>> PCG</span>
+                    <span>> Digital_Humans</span>
+                    <span>> Trajectory_Generation</span>
+                    <span>> Player_Modeling</span>
+                    <span>> Game_AI</span>
                 </div>
                 <div class="profile-links">
                     <a href="https://www.linkedin.com/in/qizhou-deng-935728208/" style="margin: 0 10px;">LinkedIn</a>
                     <a href="https://github.com/QizhouD" style="margin: 0 10px;">GitHub</a>
-                    <a href="Qizhou Deng-CV.docx" style="margin: 0 10px;">Download CV</a>
                 </div>
             </div>
             <div class="pixel-scene" aria-hidden="true">
@@ -60,10 +59,10 @@
                     </video>
                 </div>
                 <div class="project-meta">
-                    <h3>FPS AI Coach</h3>
-                    <span class="project-sub">Offline CS2 practice review (Unity + CUDA YOLO)</span>
+                    <h3>AI-FPS-Coach</h3>
+                    <span class="project-sub">Offline CS2 practice review · Unity + CUDA YOLO</span>
                     <p>
-                        Record with OBS; after the session, CUDA YOLO analyzes the video offline (not real-time mid-duel). Unity war room replays with detection overlays and a session-level aim report in degrees (FOV-aware). Measures crosshair placement deviation, vertical/horizontal tendency, effective tracking; with audio: deviation at fire, reaction time, overcorrection. Grounded against server-confirmed headshots on range footage (README table: body-box target selection median error 0.36° vs head-boxes-only 2.48°).
+                        Record a session with OBS; after it ends, CUDA YOLO analyzes the footage offline, so the game and inference never compete for the GPU. A Unity war room replays the video with detection overlays and a session-level aim report in degrees, corrected for the FOV the footage was recorded at: crosshair placement deviation, vertical and horizontal tendency, and effective tracking, plus, from the audio track, deviation at the moment of firing, reaction time and overcorrection. Checked against 44 server-confirmed headshots on range footage: placing the head from the body box gives a median error at the shot of 0.36°, against 2.48° when ranking detected head boxes only.
                     </p>
                     <div class="tech-stack mono">
                         <span class="tech-pill">Unity 6000.2.15f1</span>
@@ -98,27 +97,27 @@
                             <div class="carousel-track">
                                 <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 2">
                                     <img src="assets/trajectory-baseline-2d-collide-pred-vs-gt.png"
-                                         alt="Deterministic baseline: predicted vs ground-truth 2D root trajectories with circular obstacles">
+                                         alt="Deterministic baseline with a collision loss: predicted vs ground-truth 2D root trajectories around circular obstacles">
                                 </figure>
                                 <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 2" aria-hidden="true">
                                     <img src="assets/trajectory-baseline-2d-path-pred-vs-gt.png"
-                                         alt="Deterministic baseline: predicted vs ground-truth 2D root trajectories on the path task">
+                                         alt="Deterministic baseline with empty-scene path supervision: predicted vs ground-truth 2D root trajectories in empty scenes">
                                 </figure>
                             </div>
                         </div>
                         <button type="button" class="carousel-btn carousel-btn--prev" aria-label="Previous figure" data-carousel-prev>&lsaquo;</button>
                         <button type="button" class="carousel-btn carousel-btn--next" aria-label="Next figure" data-carousel-next>&rsaquo;</button>
                         <div class="carousel-dots" role="tablist" aria-label="Choose figure">
-                            <button type="button" class="carousel-dot" role="tab" aria-selected="true" aria-label="Obstacle collide episode" data-carousel-goto="0"></button>
-                            <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-label="Path episode" data-carousel-goto="1" tabindex="-1"></button>
+                            <button type="button" class="carousel-dot" role="tab" aria-selected="true" aria-label="Collision loss, obstacle scenes" data-carousel-goto="0"></button>
+                            <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-label="Empty-scene path supervision" data-carousel-goto="1" tabindex="-1"></button>
                         </div>
                     </div>
                 </div>
                 <div class="project-meta">
                     <h3>Language-conditioned generative trajectory planning for real-time digital humans</h3>
-                    <span class="project-sub">Research MVP · Unity embodiment demo · 2D root trajectories</span>
+                    <span class="project-sub">Research MVP · 2D root trajectories at 10&nbsp;Hz · Unity embodiment demo</span>
                     <p>
-                        Short-horizon root-motion planning for digital humans: the planner conditions on recent motion, a local goal, nearby obstacles, and a high-level language intent (idle / walk / turn / stop / wave). It samples candidate planar trajectories at 10&nbsp;Hz, rejects unsafe candidates, ranks the rest, and executes only the first segment before replanning. Stack includes conditional flow matching plus a deterministic Transformer baseline on synthetic navigation scenes with circular obstacles. The featured video is a Unity LLM-NPC embodiment loop with a <strong>mock</strong> plan for in-game locomotion—not the learned planner UI or a live model handshake. Carousel: baseline pred-vs-GT on obstacle and path episodes (ADE/FDE-style inspection). Full-body text-to-motion and live Unity handshake are next, not claimed here.
+                        A short-horizon root-motion planner for interactive digital humans. Given recent motion, a local goal, nearby obstacles and a high-level language intent (idle, walk, turn, stop or wave), it samples candidate 2D root trajectories at 10&nbsp;Hz, rejects unsafe candidates, ranks the rest, and executes only the first segment before replanning. A conditional flow-matching model and a deterministic Transformer baseline are both implemented and trained on synthetic navigation scenes with circular obstacles. The two figures show the baseline: with a collision loss it detours around obstacles in the shown episodes, and with empty-scene path supervision it produces straighter paths in open space. The video shows the Unity embodiment layer: a language model replies to the player and tags each reply with one of the five intents, which becomes a plan request that drives the character's root at 10&nbsp;Hz through the planner's trajectory contract. In the video those plans come from a procedural <strong>mock</strong> plan source, not the trained model. Current status: flow-matching trajectories still zigzag, and full-body motion is future work.
                     </p>
                     <div class="tech-stack mono">
                         <span class="tech-pill">Python</span>
@@ -129,6 +128,7 @@
                     </div>
                     <div class="actions">
                         <a href="https://github.com/QizhouD/language-conditioned-generative-trajectory-planning-for-real-time-digital-humans" target="_blank" class="btn-link">View GitHub</a>
+                        <a href="https://github.com/QizhouD/LLM-NPC" target="_blank" class="btn-link">Embodiment Layer (Unity)</a>
                         <a href="llm-npc-embodiment-demo.mp4" class="btn-link">Embodiment Demo Video</a>
                     </div>
                 </div>
@@ -138,16 +138,17 @@
                 <div class="media-frame">
                     <iframe title="Super-Platformer on itch.io" frameborder="0" src="https://itch.io/embed/4102404" width="552" height="167"><a href="https://masterjim.itch.io/super-platformer">Super-Platformer by masterjim</a></iframe>                </div>
                 <div class="project-meta">
-                    <h3>3D Platformer Systems</h3>
-                    <span class="project-sub">Real Time Platformer Game</span>
+                    <h3>Super Platformer 3D · PCG Lab</h3>
+                    <span class="project-sub">Unity platformer · procedural levels · player modeling</span>
                     <p>
-                        A scalable game architecture featuring a modular State Machine for character behavior and Strategy Pattern-based Enemy AI. Implements a fully decoupled event-driven input system and ScriptableObject architecture for robust maintainability and testability.
+                        A third-person Unity platformer whose main line of work is PCG_LAB, a playable lab that connects three systems. Levels are generated deterministically from a seed, with chunk selection constrained by the player's jump envelope and a rhythm of easy, challenge and recovery sections. An online skill estimate from checkpoint times and respawns retunes moving and timed platforms and biases the next layout, and a recorder writes a multimodal dataset of 20-D observations, behavior labels and synced 84×84 frames. An ML-Agents navigation agent drives the same player controller through its input layer; the PPO pipeline is wired, but no policy has been trained yet. The Tech Breakdown covers the underlying gameplay architecture: the player state machine, enemy AI and event channels.
                     </p>
                     <div class="tech-stack mono">
-                        <span class="tech-pill">Unity 3D</span>
+                        <span class="tech-pill">Unity 2022.3</span>
                         <span class="tech-pill">C#</span>
-                        <span class="tech-pill">State Pattern</span>
-                        <span class="tech-pill">ScriptableObjects</span>
+                        <span class="tech-pill">PCG</span>
+                        <span class="tech-pill">Player Modeling</span>
+                        <span class="tech-pill">ML-Agents</span>
                     </div>
                     <div class="actions">
                         <!-- Update links as needed -->
@@ -162,15 +163,16 @@
                     <iframe  src="https://www.youtube.com/embed/WgniXyY80Is?si=HhnHrWssUFyCjc2Z" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
                 <div class="project-meta">
-                    <h3>Dwarf V.S Mushroom</h3>
-                    <span class="project-sub">Custom C++ Game </span>
+                    <h3>Dwarf &amp; Fire</h3>
+                    <span class="project-sub">Top-down action game · C++17 / SFML</span>
                     <p>
-                        A 2D action-platformer built from scratch to demonstrate low-level systems mastery. Features a custom Entity-Component System (ECS), memory pooling for particle effects, and a hand-written AABB physics solver.
+                        A top-down action game in C++17 and SFML: a dwarf clears mushroom-infested mazes with an axe and wood-fuelled fireballs across four levels, the last with a boss. Entities are built from components and run through a single big-array system pipeline (input, AI, movement, TTL) on a fixed 60&nbsp;Hz timestep with variable-rate rendering. The code applies the Command, Observer and Service Locator patterns; levels are plain-text maps and all gameplay tuning lives in one config file. A CMake build, SFML-free unit tests, a scripted-input screenshot mode for regression runs, and CI on Windows and Linux keep it reproducible.
                     </p>
                     <div class="tech-stack mono">
-                        <span class="tech-pill">C++</span>
+                        <span class="tech-pill">C++17</span>
                         <span class="tech-pill">SFML</span>
-                        <span class="tech-pill">Data-Oriented Design</span>
+                        <span class="tech-pill">ECS</span>
+                        <span class="tech-pill">CMake / CI</span>
                     </div>
                     <div class="actions">
                         <!-- UPDATED LINK: Calls the JS function to switch views -->
@@ -188,9 +190,9 @@
                 </div>
                 <div class="project-meta">
                     <h3>Improved MCTS Agent in Pommerman</h3>
-                    <span class="project-sub">Java AI Framework Implementation</span>
+                    <span class="project-sub">QMUL MSc · Java Pommerman framework</span>
                     <p>
-                        An enhanced AI agent developed for the multi-player game Pommerman. This project optimizes Monte Carlo Tree Search (MCTS) by integrating &alpha;-AMAF and RAVE algorithms to improve decision-making efficiency. It features custom heuristics for partial observability and demonstrates a 5% win-rate increase over standard benchmark agents.
+                        An MCTS agent for the four-player game Pommerman, built in the Java Pommerman framework. It compares basic AMAF, &alpha;-AMAF and RAVE enhancements against the framework's benchmark MCTS agent: &alpha;-AMAF raised the win rate by about 5 percentage points under full observability and was roughly on par under partial observability, while basic AMAF and RAVE gave no consistent gain.
                     </p>
                     <div class="tech-stack mono">
                         <span class="tech-pill">Java</span>
@@ -219,7 +221,7 @@
                         <span class="tech-pill">Player Modeling</span>
                         <span class="tech-pill">Pathfinding</span>
                         <span class="tech-pill">NavMesh AI</span>
-                        <span class="tech-pill">CHI PLAY / CoG</span>
+                        <span class="tech-pill">Literature Review</span>
                     </div>
                     <div class="actions">
                         <a href="Case Study.pdf" target="_blank" class="btn-link">View Case Study</a>
@@ -299,12 +301,14 @@
     <header style="padding: 4rem 0;">
         <div class="container">
             <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showHome()" class="btn-link" style="margin-bottom: 2rem; border: none; font-size: 0.9rem;">← Back to Projects</a>
-            <h1>3D Platformer Systems</h1>
-            <p class="mono" style="color: var(--accent-secondary);">Technical Breakdown & Design Document</p>
+            <h1>Super Platformer 3D</h1>
+            <p class="mono" style="color: var(--accent-secondary);">Technical Breakdown: Core Gameplay Architecture</p>
         </div>
     </header>
 
     <div class="container article-content">
+
+        <p><em>This page covers the original gameplay architecture (player state machine, enemy AI, spawning and event channels) that PCG_LAB builds on. Procedural generation, player modeling and the ML-Agents pipeline are documented in the <a href="https://github.com/QizhouD/Super-Platformer-3D" target="_blank">repository README</a>.</em></p>
 
         <h2>Summary</h2>
         <p>This portfolio details the core technical architecture of this game project, emphasizing the use of software engineering principles and design patterns. The project demonstrates State Machine design, Strategy Pattern implementation, and decoupled event-driven architecture (Event Channels, ScriptableObject Input).</p>
@@ -625,7 +629,7 @@
     <header style="padding: 4rem 0;">
         <div class="container">
             <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showHome()" class="btn-link" style="margin-bottom: 2rem; border: none; font-size: 0.9rem;">← Back to Projects</a>
-            <h1>Dwarf V.S Mushroom</h1>
+            <h1>Dwarf &amp; Fire</h1>
             <p class="mono" style="color: var(--accent-secondary);">Technical Breakdown & Design Document</p>
         </div>
     </header>
@@ -633,151 +637,138 @@
     <div class="container article-content">
 
         <h2>Overview</h2>
-        <p>This project is a 2D action game built with SFML that I architected around a lightweight Entity–Component–System (ECS) core. It features a text-driven level loader, real-time spawning, collision and gameplay systems, a letterboxed render pipeline, and a minimal UI layer for HUD and menus. The codebase demonstrates applied software engineering patterns (Observer, Service Locator), data-driven world construction, and experimentation with multiple ECS storage strategies (big-array, archetypes, packed-array) for performance and maintainability.</p>
+        <p>A small top-down action game in C++17 and SFML: a dwarf clears mushroom-infested mazes with an axe and wood-fuelled fireballs across four levels, the last with a boss. I built it around a lightweight entity–component–system core with one explicit system pipeline, and applied the Command, Observer and Service Locator patterns. Levels are plain-text maps, every gameplay number lives in one config file, and the SFML-free core is covered by unit tests and built in CI on Windows and Linux.</p>
 
         <h2>Tech Stack and Key Libraries</h2>
         <ul>
-            <li><strong>SFML 2.x</strong> for windowing, graphics, input, timing, and basic audio plumbing</li>
-            <li><strong>C++17 STL</strong> (<code>&lt;memory&gt;</code>, <code>&lt;vector&gt;</code>, <code>&lt;unordered_map&gt;</code>, <code>&lt;functional&gt;</code>, <code>&lt;random&gt;</code>, etc.)</li>
-            <li><strong>Custom ECS utilities:</strong> <code>Bitmask</code>, <code>PackedArray</code>, system interfaces, and an <code>Observer</code> implementation</li>
+            <li><strong>SFML 2.5 / 2.6</strong> for windowing, graphics, input, timing and audio</li>
+            <li><strong>C++17 STL</strong> (<code>&lt;memory&gt;</code>, <code>&lt;vector&gt;</code>, <code>&lt;unordered_map&gt;</code>, <code>&lt;functional&gt;</code>, <code>&lt;random&gt;</code>, <code>&lt;filesystem&gt;</code>)</li>
+            <li><strong>Build:</strong> CMake + Ninja (MinGW-w64 or MSVC), with the original Visual Studio 2022 solution still supported</li>
+            <li><strong>Custom utilities:</strong> <code>Bitmask</code> component masks, <code>Rectangle</code> intersection, <code>Vector2</code>, and an <code>Observer</code> interface</li>
         </ul>
 
         <h2>High-Level Architecture</h2>
-        <p><strong>Game loop entry:</strong> <code>main.cpp</code> initializes <code>Game</code>, loads a textual level, and runs an adaptive fixed-target loop (nominally 60 FPS):</p>
-        <pre><code>// main.cpp
-while (!game.getWindow()->isWindowDone()) {
-    adaptiveLoop(game, lastTime, 0.016f);
-}</code></pre>
+        <p><strong>Entry:</strong> <code>main.cpp</code> parses <code>--levels</code> / <code>--script</code>, moves to the asset directory next to the executable when needed, initializes <code>Game</code> and runs a fixed-timestep loop.</p>
+        <p><strong>Core controller:</strong> <code>Game</code> owns the level flow (menu, levels, pause, results), the entity list and system pipeline, collisions, the HUD and particles, and persistent progress.</p>
+        <p><strong>Rendering/UI:</strong> <code>Window</code> wraps <code>sf::RenderWindow</code> with a scrolling world view, a fixed UI view and letterboxing; <code>Hud</code> draws gameplay HUD, toasts and menu overlays.</p>
+        <p><strong>World building:</strong> <code>LevelParser</code> turns a text map into pure data; <code>Game::loadLevel</code> builds the <code>Board</code> of tiles and spawns entities from it.</p>
+        <p><strong>Systems:</strong> Input, AI, Movement and TTL systems run over every entity whose components match the system's mask.</p>
 
-        <p><strong>Core controller:</strong> <code>Game</code> orchestrates lifecycle (<code>init</code>, <code>handleInput</code>, <code>update</code>, <code>render</code>), state transitions, level management, ECS systems, and statistics.</p>
-        <p><strong>Rendering/UI:</strong> <code>Window</code> wraps <code>sf::RenderWindow</code>, a letterboxed <code>sf::View</code>, GUI font assets, and HUD/menu drawing.</p>
-        <p><strong>World building:</strong> <code>Board</code> manages tiles; level parsing maps ASCII to tiles/entities, which are created via data helpers like <code>buildEntityAt</code>.</p>
-        <p><strong>Systems:</strong> Input, Movement, Collider, Gameplay, TTL, Graphics, and Debug systems run per-entity, guarded by <code>validate</code> filters.</p>
-
-        <h2>ECS Design and Storage Strategies</h2>
-        <p><code>Game</code> supports switching ECS backends via <code>ECSType</code>:</p>
-        <ul>
-            <li><code>ECSType::BIG_ARRAY</code>: Iterate all entities for each system (<code>Game::bigArray</code>). Simple, cache-friendly when components are dense.</li>
-            <li><code>ECSType::ARCHETYPES</code>: Groups entities by component bitmask (<code>Archetype</code>) for faster system filtering.</li>
-            <li><code>ECSType::PACKED_ARRAY</code>: Uses <code>PackedArray&lt;Entity&gt;</code> for stable, compact storage and fast removal.</li>
-        </ul>
-
-        <p>Key excerpts:</p>
-        <pre><code>// Game.h
-enum class ECSType { BIG_ARRAY, ARCHETYPES, PACKED_ARRAY };
-struct Archetype {
-    std::vector&lt;std::shared_ptr&lt;Entity&gt;&gt; entities;
-    Bitmask componentMask;
-};</code></pre>
+        <h2>ECS Design</h2>
+        <p>Entities carry components (<code>Position</code>, <code>Velocity</code>, <code>Input</code>, <code>Health</code>, <code>TTL</code>, <code>AI</code>). Each system declares the components it needs as a <code>Bitmask</code>, and <code>validate</code> skips entities that do not match. Storage is a single "big array": every system walks the full entity list, in a fixed order.</p>
 
         <pre><code>// Game.cpp
-systems = { make&lt;InputSystem&gt;(), make&lt;MovementSystem&gt;(), make&lt;ColliderSystem&gt;(),
-            make&lt;GameplaySystem&gt;(), make&lt;PrintDebugSystem&gt;(), make&lt;TTLSystem&gt;() };</code></pre>
+// Order matters: input decides direction, AI decides direction, movement
+// integrates, TTL expires projectiles.
+systems.push_back(std::make_shared&lt;InputSystem&gt;());
+systems.push_back(std::make_shared&lt;AISystem&gt;());
+systems.push_back(std::make_shared&lt;MovementSystem&gt;());
+systems.push_back(std::make_shared&lt;TTLSystem&gt;());
 
-        <p>This design lets me compare iteration and filtering tradeoffs across ECS layouts and lays groundwork for archetype-specific updates (<code>Game::updateArchetypes</code>) or packed, indirect indexing (<code>Game::updatePackedArray</code>).</p>
-
-        <h2>Game Loop, Timing, and Frame Pacing</h2>
-        <ul>
-            <li><strong>Time source:</strong> <code>sf::Clock</code> in <code>Game</code> and <code>getElapsed()</code> queries in <code>main</code>.</li>
-            <li><strong>Loop method:</strong> <code>adaptiveLoop(Game&, lastTime, updateTarget)</code> computes per-frame <code>elapsedSeconds</code>, runs <code>handleInput → update → render</code>, then sleeps the remainder to hit the target frame time, and computes instantaneous FPS.</li>
-        </ul>
-
-        <pre><code>float elapsedSeconds = current - lastTime;
-if (elapsedSeconds < updateTarget) {
-    sf::sleep(sf::seconds(updateTarget - elapsedSeconds));
-}
-float fps = 1.0f / elapsedSeconds;</code></pre>
-
-        <p><code>Game::setFPS(int)</code> updates an on-screen counter; a <code>PrintDebugSystem</code> provides additional instrumentation.</p>
-
-        <h2>Windowing, Views, and Letterboxing</h2>
-        <p><code>Window</code> encapsulates creation of <code>sf::RenderWindow</code> in windowed or fullscreen modes. It uses a fixed logical <code>sf::View</code> sized to the game world (<code>logicalViewSize</code>), with a letterbox applied on resize to preserve aspect ratio.</p>
-
-        <pre><code>static void applyLetterboxToView(sf::View& v, unsigned w, unsigned h) {
-    float windowRatio = float(w)/h, viewRatio = v.getSize().x / v.getSize().y;
-    // compute viewport {posX, posY, sizeX, sizeY}
+void Game::runSystems(float elapsed) {
+    for (const auto&amp; sys : systems)
+        for (auto&amp; ent : entities)
+            if (sys-&gt;validate(ent.get()))
+                sys-&gt;update(this, ent.get(), elapsed);
 }</code></pre>
 
+        <p>Running system-major keeps each system's logic together and makes the pipeline order explicit. Entities spawned mid-frame (fireballs, potion drops) are queued and inserted after iteration, so spawning never invalidates a container that is being walked; deleted entities are removed in one pass at the end of the frame.</p>
+
+        <h2>Game Loop, Timing, and Frame Pacing</h2>
+        <p>Simulation runs at a fixed 60&nbsp;Hz; rendering runs as fast as frames arrive. Frame time is clamped to 0.25&nbsp;s so a stall (window drag, breakpoint) cannot trigger a burst of catch-up steps.</p>
+
+        <pre><code>// main.cpp
+const float dt = 1.f / 60.f;
+const float maxFrame = 0.25f;
+while (!game.getWindow()-&gt;isWindowDone()) {
+    float frame = clock.restart().asSeconds();
+    if (frame &gt; maxFrame) frame = maxFrame;
+    accumulator += frame;
+
+    game.handleInput();
+    while (accumulator &gt;= dt) {
+        game.update(dt);
+        accumulator -= dt;
+    }
+    game.render(frame);
+}</code></pre>
+
+        <p>The FPS counter is averaged over half-second windows rather than computed from a single frame.</p>
+
+        <h2>Windowing, Camera, and Letterboxing</h2>
+        <p><code>Window</code> separates three sizes: the world (level size in pixels), the view (how much of the world is visible, capped so small levels are shown whole and big ones scroll), and the OS window. A letterboxed <code>sf::View</code> maps the view onto any window size or aspect ratio.</p>
         <ul>
-            <li><strong>GUI assets:</strong> a global font, FPS text, pause text, health text/bar, and a simple menu (<code>Dwarf VS Mushrooms</code>) prompt.</li>
-            <li><code>drawGUI(const Game&)</code> renders HUD elements (FPS, health, menu, result) over the game view.</li>
+            <li><strong>Camera:</strong> follows the player smoothly, clamped to the world, and snaps to the player when a level loads.</li>
+            <li><strong>Layers:</strong> the world layer (board, entities, particles) scrolls with the camera; the UI layer (HUD, toasts, menus) is fixed to the screen.</li>
+            <li><strong>Input:</strong> all keyboard and gamepad reads go through <code>Window</code>, so a script can replace them.</li>
         </ul>
 
         <h2>Level Loading and World Construction</h2>
-        <p><code>main.cpp</code> reads <code>levels/lvl0.txt</code> into <code>std::vector&lt;std::string&gt;</code>.</p>
-        <p><code>Game::parseLevelLines</code> converts ASCII to world:</p>
+        <p><code>levels/levels.txt</code> lists the level files in play order; adding a level is a new text map plus one line in the list, with no code changes. <code>LevelParser</code> has no SFML dependency, so it is unit tested, and a broken level fails before the current one is torn down.</p>
         <ul>
-            <li><code>'.'</code> → corridor tile (<code>img/floor.png</code>)</li>
-            <li><code>'w'</code> → wall tile (<code>img/wall.png</code>)</li>
-            <li><code>'x'</code> → place a log entity and floor tile</li>
-            <li>Additional symbols map similarly (player spawn, enemies, pickups, etc.).</li>
+            <li><strong>Legend:</strong> <code>w</code> wall, <code>.</code> floor, <code>o</code> exit, <code>*</code> player start, <code>x</code> log, <code>p</code> potion, <code>e</code> mushroom, <code>B</code> boss.</li>
+            <li><strong>Validation:</strong> a map must contain exactly one <code>*</code>; ragged rows are padded with wall; unknown characters are reported with their row and column.</li>
+            <li><strong>Construction:</strong> <code>Game::loadLevel</code> builds the <code>Board</code> of tiles, then spawns logs, potions and enemies, taking enemy stats from the tuning config.</li>
         </ul>
 
-        <pre><code>const int spriteWH = 50;
-const float tileScale = 2.0f, itemScale = 1.0f;
-// Center entities on tiles
-ent->setPosition(col * spriteWH * tileScale + center, row * spriteWH * tileScale + center);</code></pre>
-        <p>This makes level creation data-driven, reproducible, and trivially editable with a text editor.</p>
+        <pre><code>// Game.h: centre an entity inside tile (col, row)
+float x = col * spriteWH * tileScale;
+float y = row * spriteWH * tileScale;
+float cntrFactor = (tileScale - itemScale) * spriteWH * 0.5f;
+ent-&gt;setPosition(x + cntrFactor, y + cntrFactor);</code></pre>
 
         <h2>Gameplay Systems and Mechanics</h2>
         <ul>
-            <li><strong>Input:</strong> <code>InputHandler</code> and <code>InputSystem</code> translate SFML events and keyboard state into player commands (<code>Command</code> pattern).</li>
-            <li><strong>Movement:</strong> <code>MovementSystem</code> integrates velocities into positions per <code>elapsed</code>.</li>
-            <li><strong>Collisions:</strong> <code>ColliderSystem</code> resolves entity collisions and tile blocking, invoking type-specific callbacks via:</li>
-        </ul>
-        <pre><code>void Game::registerCollisionCallback(EntityType type, std::function&lt;void(Entity*)&gt; cb);</code></pre>
-        <ul>
-            <li><strong>TTL:</strong> <code>TTLSystem</code> expires temporary entities (e.g., projectiles, hit effects).</li>
-            <li><strong>Rendering:</strong> <code>GraphicsSystem</code> draws all <code>GRAPHICS</code>-tagged components to the <code>Window</code>’s <code>gameView</code>.</li>
-            <li><strong>Gameplay:</strong> <code>GameplaySystem</code> handles health, attacks, pickups, and scoring. The <code>Observer</code> is used to notify achievements and stat changes without tight coupling.</li>
+            <li><strong>Input:</strong> <code>InputHandler</code> maps keys and gamepad buttons to <code>Command</code> objects (move, attack, shout, pause) that execute against the game.</li>
+            <li><strong>AI:</strong> <code>AISystem</code> patrols in random cardinal directions and chases the player within range. If a chase stays blocked by walls for 0.6&nbsp;s, the enemy gives up for 1.5&nbsp;s and wanders instead of hugging the wall.</li>
+            <li><strong>Movement and tile collision:</strong> <code>MovementSystem</code> integrates velocity one axis at a time and stops at wall tiles, so entities slide along walls instead of sticking.</li>
+            <li><strong>Entity collisions:</strong> <code>Game::handleCollisions</code> checks rectangle intersections in three passes: the axe reach box against logs and enemies, the player's body against pickups and enemies (callbacks registered per <code>EntityType</code>), and fireballs against enemies.</li>
+            <li><strong>Resources:</strong> chopping logs yields wood; a shout spends one wood to throw a fireball in the last walking direction. <code>TTLSystem</code> expires fireballs.</li>
+            <li><strong>Progress:</strong> every kill, by axe or fire, is credited exactly once in one place (score, potion drops). When the last enemy dies, the golden exit opens.</li>
         </ul>
 
         <h2>State Management and Flow</h2>
-        <p><code>enum class GameState { Menu, Playing, Result };</code></p>
-        <p>In Menu, the GUI displays a title and “Press Enter to Start”. <code>Enter</code> transitions to Playing (<code>Game::startGame()</code>).</p>
-        <p>During play, the engine tracks:</p>
+        <p><code>enum class GameState { MainMenu, Playing, Paused, LevelClear, GameOver, Victory };</code></p>
         <ul>
-            <li><code>killCount</code>, <code>fireShotCount</code> via <code>incrementKills()</code> / <code>incrementFireShots()</code></li>
-            <li><code>levelClock</code> to compute <code>levelFinishSeconds</code></li>
+            <li><strong>Menu:</strong> level select over the levels unlocked so far, with the best score shown.</li>
+            <li><strong>Play:</strong> the game pauses itself when the window loses focus; from pause the player can restart the level or quit to the menu.</li>
+            <li><strong>Results:</strong> level clear, game over and victory each play their own cue and write the high score and unlocked levels to <code>save.txt</code>.</li>
         </ul>
-        <p>On level completion or player death, <code>triggerSettlement()</code> records the result and switches to <code>Result</code> for summary.</p>
 
         <h2>Software Engineering Patterns and Rationale</h2>
         <ul>
-            <li><strong>Observer Pattern</strong> (<code>utils/Observer.h</code>): decouples gameplay events (e.g., kill, shot fired, level complete) from UI and achievement tracking.</li>
+            <li><strong>Observer Pattern</strong> (<code>utils/Observer.h</code>): the player emits gameplay events (potion collected, shout, wood collected, enemy killed); <code>AchievementObserver</code> keeps score and unlocks achievements, which the HUD shows as toasts.</li>
             <li><strong>Service Locator</strong> (<code>core/ServiceLocator.h</code>): provides access to <code>AudioManager</code> without injecting it through every system/constructor. For a larger codebase, I’d migrate to explicit dependency injection, but this keeps the sample concise.</li>
-            <li><strong>Command Pattern</strong> (<code>core/Command.h</code>): encapsulates player actions, making input rebinds and AI control easy.</li>
+            <li><strong>Command Pattern</strong> (<code>core/Command.h</code>): encapsulates player actions, so keyboard schemes, gamepad and scripted input all drive the same commands.</li>
+            <li><strong>Shared resources:</strong> <code>ResourceManager</code> loads each texture once and shares it.</li>
         </ul>
 
-        <h2>Performance and Complexity Considerations</h2>
+        <h2>Tuning, Testing, and Reproducibility</h2>
         <ul>
-            <li><strong>ECS variants</strong> allow exploring iteration complexity vs. memory layout:
-                <ul>
-                    <li><strong>Big-array:</strong> O(S×E) iteration; simplest to reason about; good when many systems touch most entities.</li>
-                    <li><strong>Archetypes:</strong> filters reduce E per system; better cache locality when grouping by component masks.</li>
-                    <li><strong>Packed arrays:</strong> reduce fragmentation and speed up removal; dense memory improves traversal.</li>
-                </ul>
-            </li>
-            <li><strong>Rendering:</strong> letterboxed view prevents stretching and reduces overdraw outside the logical viewport.</li>
-            <li><strong>Frame pacing:</strong> simple sleep-based limiter provides a stable 60 FPS target on typical Windows timers. Would upgrade to a fixed-step update accumulator under load and consider <code>timeBeginPeriod</code>/Waitable timers for precision.</li>
+            <li><strong>Tuning:</strong> every gameplay number (player speed, HP and axe, fireball speed, lifetime and damage, pickups, per-enemy stats) lives in <code>config/balance.ini</code>. Every key is optional and falls back to the compiled defaults; unknown keys or bad values are reported at startup.</li>
+            <li><strong>Unit tests:</strong> <code>tests/test_main.cpp</code> covers the SFML-free core (<code>LevelParser</code>, <code>Balance</code>, <code>SaveData</code>), checks that every shipped level is well formed, and checks that <code>balance.ini</code> matches the compiled defaults.</li>
+            <li><strong>Scripted runs:</strong> <code>--script</code> replaces the keyboard with a timed script and dumps frames to PNG, without needing window focus, for regression checks.</li>
+            <li><strong>CI:</strong> GitHub Actions builds on Windows (MinGW, static SFML) and Linux (system SFML) on every push.</li>
         </ul>
 
         <h2>Selected Code Pointers</h2>
         <ul>
-            <li>Entry and loop: <code>SFML\main.cpp</code></li>
-            <li>Game orchestration: <code>include\core\Game.h</code>, <code>source\core\Game.cpp</code></li>
-            <li>Windowing/UI: <code>include\graphics\Window.h</code>, <code>source\graphics\Window.cpp</code></li>
-            <li>Entities: <code>include\entities\Mushroom.h</code>, <code>include\entities\Player.h</code>, <code>include\entities\StaticEntities.h</code>, <code>include\entities\Fire.h</code></li>
-            <li>Systems: <code>include\systems\Systems.h</code></li>
-            <li>Utilities: <code>include\utils\PackedArray.h</code>, <code>include\utils\Observer.h</code></li>
+            <li>Entry and loop: <code>SFML/main.cpp</code></li>
+            <li>Game orchestration: <code>SFML/include/core/Game.h</code>, <code>SFML/source/core/Game.cpp</code></li>
+            <li>Levels and tuning: <code>SFML/include/core/LevelParser.h</code>, <code>SFML/include/core/Balance.h</code>, <code>SFML/include/core/ResourceManager.h</code></li>
+            <li>Windowing/UI: <code>SFML/include/graphics/Window.h</code>, <code>SFML/include/graphics/Hud.h</code>, <code>SFML/include/graphics/ParticleSystem.h</code></li>
+            <li>Entities: <code>SFML/include/entities/Player.h</code>, <code>SFML/include/entities/Enemy.h</code>, <code>SFML/include/entities/StaticEntities.h</code>, <code>SFML/include/entities/Fire.h</code></li>
+            <li>Systems: <code>SFML/include/systems/Systems.h</code>, <code>SFML/source/systems/*.cpp</code></li>
+            <li>Patterns: <code>SFML/include/utils/Observer.h</code>, <code>SFML/include/core/ServiceLocator.h</code>, <code>SFML/include/core/Command.h</code></li>
+            <li>Tests and CI: <code>tests/test_main.cpp</code>, <code>.github/workflows/ci.yml</code></li>
         </ul>
 
         <h2>Project Highlight</h2>
         <ul>
-            <li><strong>Engine architecture:</strong> clear separation of concerns (loop, ECS, rendering, UI) and the ability to swap ECS storage strategies to study performance.</li>
-            <li><strong>Data-driven content:</strong> ASCII level files parsed into a tile/actor world with consistent scaling and positioning.</li>
-            <li><strong>Practical patterns:</strong> Observer and Service Locator applied judiciously; command-based input; clean window/view management with letterboxing.</li>
-            <li><strong>Production-minded considerations:</strong> frame pacing, GUI overlays, spawning control, collision callbacks by <code>EntityType</code>, and a structured game state machine.</li>
+            <li><strong>Engine architecture:</strong> clear separation of loop, ECS pipeline, collisions, rendering and UI, with the system order stated in one place.</li>
+            <li><strong>Data-driven content:</strong> text level files and one tuning file; new levels and balance changes need no code changes.</li>
+            <li><strong>Practical patterns:</strong> Command-based input, Observer-driven achievements and Service Locator for audio, each where it removes a real coupling.</li>
+            <li><strong>Reproducibility:</strong> fixed-timestep simulation, unit-tested parsers, scripted screenshot runs and CI on two platforms.</li>
         </ul>
 
         <div style="margin-top: 4rem; text-align: center;">
