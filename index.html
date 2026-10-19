@@ -136,13 +136,36 @@
             </article>
 
             <article class="project-card">
-                <div class="media-frame">
-                    <iframe title="Super-Platformer on itch.io" frameborder="0" src="https://itch.io/embed/4102404" width="552" height="167"><a href="https://masterjim.itch.io/super-platformer">Super-Platformer by masterjim</a></iframe>                </div>
+                <div class="media-carousel"
+                     data-carousel
+                     tabindex="0"
+                     role="region"
+                     aria-roledescription="carousel"
+                     aria-label="PCG Lab layouts and gameplay">
+                    <div class="carousel-viewport">
+                        <div class="carousel-track">
+                            <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 2">
+                                <img src="assets/platformer-pcg-seed-82431.jpg"
+                                     alt="Top-down layouts of seed 82431: without abilities the route stays low and flat; with double jump unlocked the same seed climbs, turns and reaches a combat chunk">
+                            </figure>
+                            <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 2" aria-hidden="true">
+                                <img src="assets/platformer-pcg-lab-hud.jpg"
+                                     alt="PCG Lab in play: the player at the start of seed 82431 with the lab HUD for seed, abilities, adaptive difficulty, training mode and dataset recording">
+                            </figure>
+                        </div>
+                    </div>
+                    <button type="button" class="carousel-btn carousel-btn--prev" aria-label="Previous image" data-carousel-prev>&lsaquo;</button>
+                    <button type="button" class="carousel-btn carousel-btn--next" aria-label="Next image" data-carousel-next>&rsaquo;</button>
+                    <div class="carousel-dots" role="tablist" aria-label="Choose image">
+                        <button type="button" class="carousel-dot" role="tab" aria-selected="true" aria-label="Same seed with and without double jump" data-carousel-goto="0"></button>
+                        <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-label="Lab gameplay and HUD" data-carousel-goto="1" tabindex="-1"></button>
+                    </div>
+                </div>
                 <div class="project-meta">
                     <h3>Super Platformer 3D · PCG Lab</h3>
                     <span class="project-sub">Unity platformer · procedural levels · player modeling</span>
                     <p>
-                        A third-person Unity platformer whose main line of work is PCG_LAB, a playable lab that connects three systems. Levels are generated deterministically from a seed, with chunk selection constrained by the player's jump envelope and a rhythm of easy, challenge and recovery sections. An online skill estimate from checkpoint times and respawns retunes moving and timed platforms and biases the next layout, and a recorder writes a multimodal dataset of 20-D observations, behavior labels and synced 84×84 frames. An ML-Agents navigation agent drives the same player controller through its input layer; the PPO pipeline is wired, but no policy has been trained yet. The Tech Breakdown covers the underlying gameplay architecture: the player state machine, enemy AI and event channels.
+                        A third-person Unity platformer whose main line of work is PCG_LAB, a deterministic level generator. For each of 16 slots it filters a 14-chunk library by ability gates, a reachability contract derived from the player's jump parameters, an elevation band and a spatial grammar, then picks by difficulty and rhythm. The first figure shows one seed with and without double jump. Measuring per-chunk manifests exposed a failure the tests missed: with abilities off, no climbing chunk was reachable, the grammar deadlocked, and 356 of 800 chunks across 50 seeds fell back to the safest filler; relaxing the grammar before the fallback brought that to 0. A batch report over 400 levels (seeds 1–100 × 4 ability profiles) shows every level reproducible and 97–99% complete. The rest fail on overlap because the generator does not backtrack, and without abilities the library cannot reach the target difficulty past about 0.45. The lab also estimates player skill online, records 20-D observations with synced 84×84 frames, and wires an ML-Agents navigation agent through the same input layer; no policy has been trained yet.
                     </p>
                     <div class="tech-stack mono">
                         <span class="tech-pill">Unity 2022.3</span>
@@ -153,8 +176,9 @@
                     </div>
                     <div class="actions">
                         <!-- Update links as needed -->
-                        <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showPlatformer()" class="btn-link">Tech Breakdown</a>
+                        <a href="https://github.com/QizhouD/Super-Platformer-3D/blob/main/docs/pcg-story.md" target="_blank" class="btn-link">PCG Write-up</a>
                         <a href="https://github.com/QizhouD/Super-Platformer-3D" target="_blank" class="btn-link">View GitHub</a>
+                        <a role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}" onclick="showPlatformer()" class="btn-link">Tech Breakdown</a>
                     </div>
                 </div>
             </article>
@@ -314,7 +338,7 @@
 
     <div class="container article-content">
 
-        <p><em>This page covers the original gameplay architecture (player state machine, enemy AI, spawning and event channels) that PCG_LAB builds on. Procedural generation, player modeling and the ML-Agents pipeline are documented in the <a href="https://github.com/QizhouD/Super-Platformer-3D" target="_blank">repository README</a>.</em></p>
+        <p><em>This page covers the original gameplay architecture (player state machine, enemy AI, spawning and event channels) that PCG_LAB builds on. Procedural generation, player modeling and the ML-Agents pipeline are documented in the <a href="https://github.com/QizhouD/Super-Platformer-3D" target="_blank">repository README</a> and the <a href="https://github.com/QizhouD/Super-Platformer-3D/blob/main/docs/pcg-story.md" target="_blank">PCG write-up</a>.</em></p>
 
         <h2>Summary</h2>
         <p>This portfolio details the core technical architecture of this game project, emphasizing the use of software engineering principles and design patterns. The project demonstrates State Machine design, Strategy Pattern implementation, and decoupled event-driven architecture (Event Channels, ScriptableObject Input).</p>

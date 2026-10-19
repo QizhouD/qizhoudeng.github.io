@@ -150,8 +150,6 @@ iframe { border: 0; }
 .media-frame:has(#gameCanvas) { display: flex; justify-content: center; align-items: center; }
 #gameCanvas { display: block; width: auto !important; height: 100% !important; max-width: 100%; aspect-ratio: 5 / 3; }
 .game-overlay { position: absolute; bottom: 0; left: 0; right: 0; padding: 4px 8px; color: #e0e0e0; background: #0a0a0fed; font: .625rem/1.6 'JetBrains Mono', monospace; text-align: center; pointer-events: none; }
-.media-frame:has(iframe[src*="itch.io"]) { display: flex; align-items: center; }
-.media-frame iframe[src*="itch.io"] { height: 167px; }
 .grid-2 { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr); gap: 48px; border-top: 1px solid var(--border); padding-top: 40px; }
 .grid-2 > div { color: var(--text-muted); }
 .grid-2 > div + div { padding-left: 48px; border-left: 1px solid var(--border); }
