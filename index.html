@@ -6,7 +6,7 @@
     <meta name="description" content="Qizhou Deng — Game AI and Computational Media: trajectory generation for digital humans, player modeling, and procedural content generation.">
     <title>Qizhou Deng</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="portfolio.css?v=7">
+    <link rel="stylesheet" href="portfolio.css?v=9">
 </head>
 <body>
 
@@ -49,6 +49,77 @@
 
         <section id="work">
             <h2 class="section-label">Selected Projects</h2>
+
+            <article class="project-card project-card--featured project-card--flagship" id="afterglow">
+                <div class="project-media-column">
+                    <div class="media-frame">
+                        <video autoplay muted loop playsinline
+                               poster="assets/afterglow-poster.jpg"
+                               aria-label="Afterglow: Imjin 1593, in-engine footage of the Byeokjegwan demo: the painted map gives way to the battlefield, Ming cavalry charge Japanese formations, units break, scatter and regroup"
+                               style="width:100%; height:100%; object-fit:cover;">
+                            <source src="assets/afterglow-card-loop.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="media-carousel"
+                         data-carousel
+                         tabindex="0"
+                         role="region"
+                         aria-roledescription="carousel"
+                         aria-label="Afterglow: Imjin 1593 screenshots">
+                        <div class="carousel-viewport">
+                            <div class="carousel-track">
+                                <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+                                    <img src="assets/afterglow-battle-overview.jpg" loading="lazy"
+                                         alt="Battle view in English: unit counters on a painted map of the Byeokjegwan valley, a charge preview with its multiplier, and the orders, unit and battle-log panels">
+                                </figure>
+                                <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true">
+                                    <img src="assets/afterglow-formation-break.jpg" loading="lazy"
+                                         alt="Near view, in-engine: a Ming three-eyed-gun cavalry unit charges through a Japanese formation among pine groves; a Breakthrough label marks the impact as the broken unit scatters into groups">
+                                </figure>
+                                <figure class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true">
+                                    <img src="assets/afterglow-debug-panel.jpg" loading="lazy"
+                                         alt="In-game debug panel over the battle: tick, phase and per-tick state hash, single-step control, simulation and render timings over the last 120 frames, and replay save and load">
+                                </figure>
+                            </div>
+                        </div>
+                        <button type="button" class="carousel-btn carousel-btn--prev" aria-label="Previous screenshot" data-carousel-prev>&lsaquo;</button>
+                        <button type="button" class="carousel-btn carousel-btn--next" aria-label="Next screenshot" data-carousel-next>&rsaquo;</button>
+                        <div class="carousel-dots" role="tablist" aria-label="Choose screenshot">
+                            <button type="button" class="carousel-dot" role="tab" aria-selected="true" aria-label="Battle view" data-carousel-goto="0"></button>
+                            <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-label="Cavalry breakthrough, near view" data-carousel-goto="1" tabindex="-1"></button>
+                            <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-label="Debug panel" data-carousel-goto="2" tabindex="-1"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-meta">
+                    <h3>Afterglow: Imjin 1593 <span class="title-alt" lang="zh-Hant">餘暉：壬辰 1593</span></h3>
+                    <span class="project-sub">Historical tactics game demo · Battle of Byeokjegwan, 1593 · C++20 / SFML 3</span>
+                    <p>
+                        A pausable real-time tactics demo of the Battle of Byeokjegwan, played from the side of the Ming Liaodong cavalry: counters on a painted map, charges that break formations, morale collapse, and routed units that scatter and regroup.
+                    </p>
+                    <ul class="project-points">
+                        <li><strong>Historical background.</strong> In early 1593, after retaking Pyongyang, the Ming army pushed south toward Hanseong, with Li Rusong riding ahead at the head of a mostly cavalry vanguard. At Byeokjegwan it ran into a larger Japanese force under Kobayakawa Takakage and Tachibana Muneshige. Yang Yuan's rearguard struck from the other side and Li Rusong broke out after his horse was shot from under him; after the battle the Ming turned to peace talks. The scenario follows this arc in three phases: break the Japanese vanguard, hold off the main body, and bring Li Rusong off the field.</li>
+                        <li><strong>Deterministic C++ core.</strong> The rules core uses only the standard library; the same seed and commands give the same state hash on every tick, so a replay is just the seed and commands. Headless batch battles, parity tests against the HTML rules prototype, CI on MSVC and GCC 13 with warnings as errors, and an in-game debug panel with single-step, replay save/load, state hash, and simulation/render timings.</li>
+                        <li><strong>Built with coding agents.</strong> The game grew out of the C++/SFML framework from my MSc project <a href="https://github.com/QizhouD/2D-action-game" target="_blank" rel="noopener">Dwarf &amp; Fire</a>, and I developed it from there together with coding agents. The work is split into about 30 task cards with acceptance criteria; agents implement each card as a pull request, which I review and accept against the tests and screenshots.</li>
+                    </ul>
+                    <p class="project-note">
+                        Status: Windows demo build 0.1.0, available on request (not publicly released); full-battle playtesting in progress. Map detail textures are AI-generated and the soldier figures are procedural Blender models written by a coding agent (<a href="https://github.com/QizhouD/tieqi/blob/main/assets/AI_ASSETS.md" target="_blank" rel="noopener">AI asset register</a>); the video narration is AI text-to-speech. <a href="assets/afterglow-video-credits.txt" target="_blank">Video music and sound credits</a>.
+                    </p>
+                    <div class="tech-stack mono">
+                        <span class="tech-pill">C++20</span>
+                        <span class="tech-pill">SFML 3</span>
+                        <span class="tech-pill">Deterministic Simulation</span>
+                        <span class="tech-pill">CMake / CI</span>
+                        <span class="tech-pill">Agentic Coding</span>
+                        <span class="tech-pill">Historical Game Design</span>
+                    </div>
+                    <div class="actions">
+                        <a href="assets/afterglow-prologue-gameplay.mp4" target="_blank" class="btn-link">Watch Trailer</a>
+                        <a href="https://github.com/QizhouD/tieqi" target="_blank" rel="noopener" class="btn-link">View GitHub</a>
+                        <a href="https://github.com/QizhouD/tieqi/blob/main/docs/DESIGN.md" target="_blank" rel="noopener" class="btn-link">Design Document</a>
+                    </div>
+                </div>
+            </article>
 
             <article class="project-card project-card--featured">
                 <div class="media-frame">

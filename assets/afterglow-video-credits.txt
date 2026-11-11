@@ -1,0 +1,38 @@
+Afterglow: Imjin 1593, prologue and gameplay (portfolio cut)
+Credits for Afterglow-Imjin-1593-prologue-and-gameplay.mp4: the whole prologue film, then in-engine footage.
+
+Music:
+"Sad strings orchestra" by Derdish is licensed under CC BY 3.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/3.0/.
+
+Sound effects:
+"Sea waves.wav" by Ganesh Mohan T, Wikimedia Commons, CC BY-SA
+"Taiko Drums - Mastered WITH Stereo Imaging.wav" by WelvynZPorterSamples is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+"Stamp" by kermite607 is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+"thick-stamp-sub.wav" by newagesoup is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.
+"Horse Galloping..wav" by Jordishaw is licensed under CC BY 3.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/3.0/.
+"Gong55.ogg" by stephan, Wikimedia Commons, CC0
+"Cannon shot" by SamsterBirdies is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+"Medieval cannon shot" by engray is licensed under CC BY 3.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/3.0/.
+"Ice Crack 5.wav" by ecfike is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+"Conch shell.ogg" by Dbolton (author assumed by Wikimedia Commons), Wikimedia Commons, CC BY
+"Underlining Stroke on Paper" by zembacraftworks is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+"Draw_Circle_Paintbrush_04.wav" by Joao_Janz is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+"harnessed horse in forest.wav" by bruno.auzet is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+"Bass Boom" by LordHannes is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+"Rain-Light 01.wav" by jaime_enrique is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+"Ambience, Large Crowd, A.wav" by InspectorJ is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.
+"Ambience, Creepy Wind, A.wav" by InspectorJ is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.
+"Z Finland rowing.wav" by juskiddink is licensed under CC BY 4.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/4.0/.
+"Office paper crumple folding handling.wav" by WavJunction.com is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+"paper - folding 01.wav" by Anthousai is marked with CC0 1.0. To view the terms, visit https://creativecommons.org/publicdomain/zero/1.0/.
+
+Images:
+"Gyoryonggi (蛟龍旗, Yellow Dragon Flag)", Joseon dynasty, National Palace Museum of Korea, public domain (Wikimedia Commons)
+
+Map data and type:
+Made with Natural Earth
+LXGW WenKai TC Bold by LXGW (OFL-1.1)
+Noto Serif TC by Google, Adobe (OFL-1.1)
+
+Narration voice: Google Gemini TTS (Algenib).
+In-engine footage, textures and soldier sprites: Afterglow: Imjin 1593 (the game, demo build).
